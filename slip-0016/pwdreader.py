@@ -5,18 +5,20 @@ from trezorlib.transport_hid import HidTransport
 from binascii import hexlify, unhexlify
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-import hmac, hashlib, base58, json, sys
+import hmac
+import hashlib
+import json
+import os
 
-
-#return path by BIP-32
+# Return path by BIP-32
 def getPath():
-    return client.expand_path("10016'/0");
+    return client.expand_path("10016'/0")
 
-#Deriving master key
+# Deriving master key
 def getMasterKey():
     bip32_path = getPath()
-    ENC_KEY = "Activate TREZOR Password Manager?"
-    ENC_VALUE = unhexlify("2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee")
+    ENC_KEY = 'Activate TREZOR Password Manager?'
+    ENC_VALUE = unhexlify('2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee')
     key = hexlify(client.encrypt_keyvalue(
         bip32_path,
         ENC_KEY,
@@ -24,29 +26,25 @@ def getMasterKey():
         True,
         True
     ))
-    return key;
+    return key
 
-#Deriving file name and encryption key
+# Deriving file name and encryption key
 def getFileEncKey(key):
     filekey, enckey = key[:len(key)/2], key[len(key)/2:]
-    FILENAME_MESS = "5f91add3fa1c3c76e90c90a3bd0999e2bd7833d06a483fe884ee60397aca277a"
+    FILENAME_MESS = '5f91add3fa1c3c76e90c90a3bd0999e2bd7833d06a483fe884ee60397aca277a'
     digest = hmac.new(filekey, FILENAME_MESS, hashlib.sha256).hexdigest()
     filename = ''.join((digest, '.pswd'))
-    return [filename, filekey, enckey];
+    return [filename, filekey, enckey]
 
-#Path to locally stored file
-def getFilePath():
-    return '/home/chren/';
-
-#File level decryption and file reading
+# File level decryption and file reading
 def decryptStorage(path, key):
     cipherkey = unhexlify(key)
-    with open(path, "rb") as f:
+    with open(path, 'rb') as f:
         iv = f.read(12)
         tag = f.read(16)
         cipher = Cipher(algorithms.AES(cipherkey), modes.GCM(iv, tag), backend=default_backend())
         decryptor = cipher.decryptor()
-        data = "";
+        data = ''
         while True:
             block = f.read(16)
             # data are not authenticated yet
@@ -56,7 +54,7 @@ def decryptStorage(path, key):
                 break
         # throws exception when the tag is wrong
         data = data + decryptor.finalize()
-    return json.loads(data);
+    return json.loads(data)
 
 def decryptEntryValue(nonce, val):
     cipherkey = unhexlify(nonce)
@@ -64,7 +62,7 @@ def decryptEntryValue(nonce, val):
     tag = val[12:28]
     cipher = Cipher(algorithms.AES(cipherkey), modes.GCM(iv, tag), backend=default_backend())
     decryptor = cipher.decryptor()
-    data = "";
+    data = ''
     inputData = val[28:]
     while True:
         block = inputData[:16]
@@ -75,11 +73,13 @@ def decryptEntryValue(nonce, val):
             break
         # throws exception when the tag is wrong
     data = data + decryptor.finalize()
-    return json.loads(data);
+    return json.loads(data)
 
-#decrypt give entry nonce
+# decrypt give entry nonce
 def getDecryptedNonce(entry):
-    print '\nWaiting for TREZOR input!\n'
+    print
+    print 'Waiting for TREZOR input ...'
+    print
     ENC_KEY = ''.join(('Unlock ', entry['title'], ' for user ', entry['username'], '?'))
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
@@ -89,59 +89,65 @@ def getDecryptedNonce(entry):
         False,
         True
     ))
-    return decrypted_nonce;
+    return decrypted_nonce
 
-#list whatever
-def printList(obj, val):
-    objList = obj[val]
-    print '\n'
-    print 'Entry list:'
-    for x in xrange (len(objList)):
-        keys = objList[str(x)].keys()
-        print 'Entry id ', x
-        for y in xrange (len(keys)):
-            print keys[y],': ',objList[str(x)][keys[y]]
-        print '\n'
-    return;
+# pretty print of list
+def printEntries(entries):
+    print 'Password entries'
+    print '================'
+    print
+    for k, v in entries.iteritems():
+        print 'Entry id: #%s' % k
+        print '-------------'
+        for kk, vv in v.iteritems():
+            if kk in ['nonce', 'safe_note', 'password']: continue # skip these fields
+            print '*', kk, ': ', vv
+        print
+    return
 
 
 def main():
+    print
+    print 'Confirm operation on TREZOR'
+    print
+
     masterKey = getMasterKey()
-    #print 'master key: ', masterKey
+    #print 'master key:', masterKey
 
     fileName = getFileEncKey(masterKey)[0]
-    #print 'file name: ', fileName
+    #print 'file name:', fileName
 
-    path = getFilePath()
-    #print 'path to file: ', path
+    path = os.path.expanduser('~/Dropbox/Apps/TREZOR Password Manager/')
+    #print 'path to file:', path
 
     encKey = getFileEncKey(masterKey)[2]
-    #print 'enckey: ', encKey
+    #print 'enckey:', encKey
 
     full_path = ''.join((path, fileName))
     parsed_json = decryptStorage(full_path, encKey)
 
     #list entries
-    printList(parsed_json, 'entries')
     entries = parsed_json['entries']
+    printEntries(entries)
 
     entry_id = raw_input('Select entry number to decrypt: ')
+    entry_id = str(entry_id)
 
-    plain_nonce = getDecryptedNonce(entries[str(entry_id)])
+    plain_nonce = getDecryptedNonce(entries[entry_id])
 
-
-    pwdArr = entries[str(entry_id)]['password']['data']
+    pwdArr = entries[entry_id]['password']['data']
     pwdHex = ''.join([ hex(x)[2:].zfill(2) for x in pwdArr ])
-    print 'password : ', decryptEntryValue(plain_nonce, unhexlify(pwdHex))
+    print 'password: ', decryptEntryValue(plain_nonce, unhexlify(pwdHex))
 
-    safeNoteArr = entries[str(entry_id)]['safe_note']['data']
+    safeNoteArr = entries[entry_id]['safe_note']['data']
     safeNoteHex = ''.join([ hex(x)[2:].zfill(2) for x in safeNoteArr ])
-    print 'safe_note : ', decryptEntryValue(plain_nonce, unhexlify(safeNoteHex))
-    return;
+    print 'safe_note:', decryptEntryValue(plain_nonce, unhexlify(safeNoteHex))
 
-if __name__ == "__main__":
+    return
+
+if __name__ == '__main__':
     try:
-        # init Trezor transport
+        # init TREZOR transport
         client = TrezorClient(HidTransport(HidTransport.enumerate()[0]))
     except:
         print 'TREZOR is not plugged in. Please, connect TREZOR and retry.'
