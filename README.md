@@ -18,4 +18,5 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0013](slip-0013.md) | Authentication using deterministic hierarchy                          | Standard      | Draft    |
 | [SLIP-0014](slip-0014.md) | Stress Test Deterministic Wallet                                      | Informational | Draft    |
 | [SLIP-0015](slip-0015.md) | Format for Bitcoin metadata and its encryption in HD wallets          | Standard      | Draft    |
+| [SLIP-0016](slip-0016.md) | Format for password storage and its encryption                        | Standard      | Draft    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Draft    |
