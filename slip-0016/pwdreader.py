@@ -75,7 +75,7 @@ def decryptEntryValue(nonce, val):
     data = data + decryptor.finalize()
     return json.loads(data)
 
-# decrypt give entry nonce
+# Decrypt give entry nonce
 def getDecryptedNonce(entry):
     print
     print 'Waiting for TREZOR input ...'
@@ -91,7 +91,7 @@ def getDecryptedNonce(entry):
     ))
     return decrypted_nonce
 
-# pretty print of list
+# Pretty print of list
 def printEntries(entries):
     print 'Password entries'
     print '================'
