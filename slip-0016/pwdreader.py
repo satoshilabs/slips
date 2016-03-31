@@ -80,7 +80,8 @@ def getDecryptedNonce(entry):
     print
     print 'Waiting for TREZOR input ...'
     print
-    ENC_KEY = ''.join(('Unlock ', entry['title'], ' for user ', entry['username'], '?'))
+    title = entry['title'].replace("http://","").replace("https://","")
+    ENC_KEY = ''.join(('Unlock ', title, ' for user ', entry['username'], '?'))
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
         getPath(),
@@ -117,7 +118,7 @@ def main():
     fileName = getFileEncKey(masterKey)[0]
     #print 'file name:', fileName
 
-    path = os.path.expanduser('~/Dropbox/Apps/TREZOR Password Manager/')
+    path = os.path.expanduser('~/Dropbox/Apps/TREZOR Passwords/')
     #print 'path to file:', path
 
     encKey = getFileEncKey(masterKey)[2]
