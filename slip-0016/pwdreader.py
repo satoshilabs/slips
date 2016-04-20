@@ -33,7 +33,7 @@ def getFileEncKey(key):
     filekey, enckey = key[:len(key)/2], key[len(key)/2:]
     FILENAME_MESS = '5f91add3fa1c3c76e90c90a3bd0999e2bd7833d06a483fe884ee60397aca277a'
     digest = hmac.new(filekey, FILENAME_MESS, hashlib.sha256).hexdigest()
-    filename = ''.join((digest, '.pswd'))
+    filename = digest + '.pswd'
     return [filename, filekey, enckey]
 
 # File level decryption and file reading
@@ -80,8 +80,11 @@ def getDecryptedNonce(entry):
     print
     print 'Waiting for TREZOR input ...'
     print
-    title = entry['title'].replace("http://","").replace("https://","")
-    ENC_KEY = ''.join(('Unlock ', title, ' for user ', entry['username'], '?'))
+    if 'item' in entry:
+        item = entry['item'].replace('http://', '').replace('https://', '')
+    else:
+        item = entry['title'].replace('http://', '').replace('https://', '')
+    ENC_KEY = 'Unlock %s for user %s?' % (item, entry['username'])
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
         getPath(),
@@ -118,13 +121,13 @@ def main():
     fileName = getFileEncKey(masterKey)[0]
     #print 'file name:', fileName
 
-    path = os.path.expanduser('~/Dropbox/Apps/TREZOR Passwords/')
+    path = os.path.expanduser('~/Dropbox/Apps/TREZOR Password Manager/')
     #print 'path to file:', path
 
     encKey = getFileEncKey(masterKey)[2]
     #print 'enckey:', encKey
 
-    full_path = ''.join((path, fileName))
+    full_path = path + fileName
     parsed_json = decryptStorage(full_path, encKey)
 
     #list entries
