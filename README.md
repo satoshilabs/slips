@@ -1,4 +1,4 @@
-#SatoshiLabs Improvement Proposals
+# SatoshiLabs Improvement Proposals
 
 SatoshiLabs projects need a way how to document their technical decisions and features.
 For some of them Bitcoin Improvement Proposal (BIP) is not a right place because
