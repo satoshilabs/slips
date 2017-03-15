@@ -1,5 +1,7 @@
 # SatoshiLabs Improvement Proposals
 
+[![Build Status](https://travis-ci.org/satoshilabs/slips.svg?branch=master)](https://travis-ci.org/satoshilabs/slips)
+
 SatoshiLabs projects need a way how to document their technical decisions and features.
 For some of them Bitcoin Improvement Proposal (BIP) is not a right place because
 their range and implications are outside of the scope of Bitcoin and cryptocurrencies.
