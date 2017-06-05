@@ -24,6 +24,7 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0017](slip-0017.md) | Elliptic Curve Diffie-Hellman using deterministic hierarchy           | Standard      | Draft    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Draft    |
 | [SLIP-0048](slip-0048.md) | Deterministic key hierarchy for Graphene-based networks               | Informational | Draft    |
+| [SLIP-0173](slip-0173.md) | Registered human-readable parts for BIP-0173                          | Standard      | Draft    |
 
 ---
 
