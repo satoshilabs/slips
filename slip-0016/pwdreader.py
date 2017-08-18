@@ -84,6 +84,12 @@ def getDecryptedNonce(entry):
         item = entry['item'].replace('http://', '').replace('https://', '')
     else:
         item = entry['title'].replace('http://', '').replace('https://', '')
+
+    # The Trezor password manager chrome extension also strips anything
+    # following the first slash in the URL- do the same here to maintain
+    # compatability
+    item = item.split('/')[0]
+
     ENC_KEY = 'Unlock %s for user %s?' % (item, entry['username'])
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
