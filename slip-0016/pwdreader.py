@@ -9,6 +9,7 @@ import hmac
 import hashlib
 import json
 import os
+from urlparse import urlparse
 
 # Return path by BIP-32
 def getPath():
@@ -81,9 +82,14 @@ def getDecryptedNonce(entry):
     print 'Waiting for TREZOR input ...'
     print
     if 'item' in entry:
-        item = entry['item'].replace('http://', '').replace('https://', '')
+        item = entry['item']
     else:
-        item = entry['title'].replace('http://', '').replace('https://', '')
+        item = entry['title']
+
+    pr = urlparse(item)
+    if pr.scheme and pr.netloc:
+        item = pr.netloc
+
     ENC_KEY = 'Unlock %s for user %s?' % (item, entry['username'])
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
