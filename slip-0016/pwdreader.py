@@ -1,7 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
-from trezorlib.client import TrezorClient
-from trezorlib.transport_hid import HidTransport
+from __future__ import print_function
+
 from binascii import hexlify, unhexlify
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -9,15 +9,22 @@ import hmac
 import hashlib
 import json
 import os
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
+    input = raw_input
+
+from trezorlib.client import TrezorClient
+from trezorlib.transport_hid import HidTransport
 
 # Return path by BIP-32
-def getPath():
+def getPath(client):
     return client.expand_path("10016'/0")
 
 # Deriving master key
-def getMasterKey():
-    bip32_path = getPath()
+def getMasterKey(client):
+    bip32_path = getPath(client)
     ENC_KEY = 'Activate TREZOR Password Manager?'
     ENC_VALUE = unhexlify('2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee2d650551248d792eabf628f451200d7f51cb63e46aadcbb1038aacb05e8c8aee')
     key = hexlify(client.encrypt_keyvalue(
@@ -31,8 +38,8 @@ def getMasterKey():
 
 # Deriving file name and encryption key
 def getFileEncKey(key):
-    filekey, enckey = key[:len(key)/2], key[len(key)/2:]
-    FILENAME_MESS = '5f91add3fa1c3c76e90c90a3bd0999e2bd7833d06a483fe884ee60397aca277a'
+    filekey, enckey = key[:len(key) // 2], key[len(key) //2:]
+    FILENAME_MESS = b'5f91add3fa1c3c76e90c90a3bd0999e2bd7833d06a483fe884ee60397aca277a'
     digest = hmac.new(filekey, FILENAME_MESS, hashlib.sha256).hexdigest()
     filename = digest + '.pswd'
     return [filename, filekey, enckey]
@@ -50,11 +57,11 @@ def decryptStorage(path, key):
             block = f.read(16)
             # data are not authenticated yet
             if block:
-                data = data + decryptor.update(block)
+                data = data + decryptor.update(block).decode()
             else:
                 break
         # throws exception when the tag is wrong
-        data = data + decryptor.finalize()
+        data = data + decryptor.finalize().decode()
     return json.loads(data)
 
 def decryptEntryValue(nonce, val):
@@ -69,18 +76,18 @@ def decryptEntryValue(nonce, val):
         block = inputData[:16]
         inputData = inputData[16:]
         if block:
-            data = data + decryptor.update(block)
+            data = data + decryptor.update(block).decode()
         else:
             break
         # throws exception when the tag is wrong
-    data = data + decryptor.finalize()
+    data = data + decryptor.finalize().decode()
     return json.loads(data)
 
 # Decrypt give entry nonce
-def getDecryptedNonce(entry):
-    print
-    print 'Waiting for TREZOR input ...'
-    print
+def getDecryptedNonce(client, entry):
+    print()
+    print('Waiting for TREZOR input ...')
+    print()
     if 'item' in entry:
         item = entry['item']
     else:
@@ -93,7 +100,7 @@ def getDecryptedNonce(entry):
     ENC_KEY = 'Unlock %s for user %s?' % (item, entry['username'])
     ENC_VALUE = entry['nonce']
     decrypted_nonce =  hexlify(client.decrypt_keyvalue(
-        getPath(),
+        getPath(client),
         ENC_KEY,
         unhexlify(ENC_VALUE),
         False,
@@ -103,63 +110,64 @@ def getDecryptedNonce(entry):
 
 # Pretty print of list
 def printEntries(entries):
-    print 'Password entries'
-    print '================'
-    print
-    for k, v in entries.iteritems():
-        print 'Entry id: #%s' % k
-        print '-------------'
-        for kk, vv in v.iteritems():
+    print('Password entries')
+    print('================')
+    print()
+    for k, v in entries.items():
+        print('Entry id: #%s' % k)
+        print('-------------')
+        for kk, vv in v.items():
             if kk in ['nonce', 'safe_note', 'password']: continue # skip these fields
-            print '*', kk, ': ', vv
-        print
+            print('*', kk, ': ', vv)
+        print()
     return
 
 
 def main():
-    print
-    print 'Confirm operation on TREZOR'
-    print
+    devices = HidTransport.enumerate()
+    if not devices:
+        print('TREZOR is not plugged in. Please, connect TREZOR and retry.')
+        return
 
-    masterKey = getMasterKey()
-    #print 'master key:', masterKey
+    client = TrezorClient(devices[0])
+
+    print()
+    print('Confirm operation on TREZOR')
+    print()
+
+    masterKey = getMasterKey(client)
+    # print('master key:', masterKey)
 
     fileName = getFileEncKey(masterKey)[0]
-    #print 'file name:', fileName
+    # print('file name:', fileName)
 
     path = os.path.expanduser('~/Dropbox/Apps/TREZOR Password Manager/')
-    #print 'path to file:', path
+    # print('path to file:', path)
 
     encKey = getFileEncKey(masterKey)[2]
-    #print 'enckey:', encKey
+    # print('enckey:', encKey)
 
     full_path = path + fileName
     parsed_json = decryptStorage(full_path, encKey)
 
-    #list entries
+    # list entries
     entries = parsed_json['entries']
     printEntries(entries)
 
-    entry_id = raw_input('Select entry number to decrypt: ')
+    entry_id = input('Select entry number to decrypt: ')
     entry_id = str(entry_id)
 
-    plain_nonce = getDecryptedNonce(entries[entry_id])
+    plain_nonce = getDecryptedNonce(client, entries[entry_id])
 
     pwdArr = entries[entry_id]['password']['data']
     pwdHex = ''.join([ hex(x)[2:].zfill(2) for x in pwdArr ])
-    print 'password: ', decryptEntryValue(plain_nonce, unhexlify(pwdHex))
+    print('password: ', decryptEntryValue(plain_nonce, unhexlify(pwdHex)))
 
     safeNoteArr = entries[entry_id]['safe_note']['data']
     safeNoteHex = ''.join([ hex(x)[2:].zfill(2) for x in safeNoteArr ])
-    print 'safe_note:', decryptEntryValue(plain_nonce, unhexlify(safeNoteHex))
+    print('safe_note:', decryptEntryValue(plain_nonce, unhexlify(safeNoteHex)))
 
     return
 
 if __name__ == '__main__':
-    try:
-        # init TREZOR transport
-        client = TrezorClient(HidTransport(HidTransport.enumerate()[0]))
-    except:
-        print 'TREZOR is not plugged in. Please, connect TREZOR and retry.'
-    else:
-        main()
+    main()
