@@ -22,6 +22,7 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0015](slip-0015.md) | Format for Bitcoin metadata and its encryption in HD wallets          | Standard      | Draft    |
 | [SLIP-0016](slip-0016.md) | Format for password storage and its encryption                        | Standard      | Draft    |
 | [SLIP-0017](slip-0017.md) | Elliptic Curve Diffie-Hellman using deterministic hierarchy           | Standard      | Draft    |
+| [SLIP-0018](slip-0018.md) | reserved                                                              | Standard      | Draft    |
 | [SLIP-0032](slip-0032.md) | Extended serialization format for BIP-32 wallets                      | Standard      | Draft    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Draft    |
 | [SLIP-0048](slip-0048.md) | Deterministic key hierarchy for Graphene-based networks               | Informational | Draft    |
