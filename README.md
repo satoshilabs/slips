@@ -27,7 +27,8 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0039](slip-0039.md) | Shamir's Secret-Sharing for Mnemonic Codes                            | Standard      | Draft    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Draft    |
 | [SLIP-0048](slip-0048.md) | Deterministic key hierarchy for Graphene-based networks               | Informational | Draft    |
-| [SLIP-0173](slip-0173.md) | Registered human-readable parts for BIP-0173                          | Standard      | Draft    |
+| [SLIP-0132](slip-0132.md) | Registered human-readable parts for BIP-0173                          | Standard      | Draft    |
+| [SLIP-0173](slip-0173.md) | Registered HD version bytes for BIP-0032                              | Standard      | Draft    |
 
 ---
 
