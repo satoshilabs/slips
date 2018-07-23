@@ -1,0 +1,63 @@
+<pre>
+  BIP: XXXX
+  Layer: Applications
+  Title: TxRef Non-Bitcoin Display Formats (Auxiliary Appendix)
+  Author: Велеслав <veleslav.bips@protonmail.com>, Jonas Schnelli <dev@jonasschnelli.ch>
+  Status: Draft
+  Type: Informational
+  Created: 
+  License: BSD-2-Clause
+</pre>
+
+# Introduction 
+
+## Abstract 
+
+The proposed BIP: “Bech32 Encoded Transaction Position References”, https://github.com/bitcoin/bips/pull/555 defines a set of different display formats for Transaction Reference.  This SLIP is an additional auxiliary appendix that defines non-bitcoin related display formats.  Please reference the BIP for the full specification.
+
+## Copyright 
+
+This BIP is licensed under the 2-clause BSD license.
+
+### Litecoin Display Formats 
+
+
+This appendix contains the specifications for Litecoin Related Application Display Formats.
+
+#### Litecoin Display Format 0 
+
+
+This application display format is defined for all Litecoin main-network transactions that have:
+* Block Height
+    * Between 0, and 0xFFFFFF.
+* Transaction Position
+    * Between 0, and 0x7FFF
+
+This application display format produces a 15-character data part starting with the character ‘y’.
+* Separators MUST be added as shown: tx1:yXXX-XXXX-XXXX-XXX.
+{| class="wikitable"
+|'''Format ‘0’'''
+|'''Bit'''
+|'''Bit(s)'''
+|'''15 Character Encoding = 45bit + 30bit checksum'''
+|-
+|Magic
+|0 – 4
+|5
+|0x4
+|-
+|Version
+|5
+|1
+|Must be set to 0x0
+|-
+|Block Height
+|6 – 29
+|24
+|From the Genesis Block to about Year 2124
+|-
+|Tx Position
+|30 – 44
+|15
+|32767 transactions. (More than a full Litecoin Block).
+|}
