@@ -8,4 +8,4 @@ before_script:
 
 script:
   - markdownlint -c markdownlint.json *.md
-  - check.sh
+  - ./check.sh
