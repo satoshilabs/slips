@@ -111,12 +111,14 @@ def show_testvector(name, curvename, seedhex, derivationpath):
     fpr = '\x00\x00\x00\x00'
     path = 'm'
     print "### "+name+" for "+curvename
+    print ''
     print "Seed (hex): " + seedhex
+    print ''
     print '* Chain ' + path
-    print '    * fpr: ' + binascii.hexlify(fpr)
-    print '    * chain: ' + binascii.hexlify(c)
-    print '    * prv: ' + binascii.hexlify(k)
-    print '    * pub: ' + binascii.hexlify(p)
+    print '  * fingerprint: ' + binascii.hexlify(fpr)
+    print '  * chain code: ' + binascii.hexlify(c)
+    print '  * private: ' + binascii.hexlify(k)
+    print '  * public: ' + binascii.hexlify(p)
     depth = 0
     for i in derivationpath:
         if curve == 'ed25519':
@@ -130,10 +132,10 @@ def show_testvector(name, curvename, seedhex, derivationpath):
         k,c = derive(k, c, i, curve)
         p = publickey(k, curve) 
         print '* Chain ' + path
-        print '    * fpr: ' + binascii.hexlify(fpr)
-        print '    * chain: ' + binascii.hexlify(c)
-        print '    * prv: ' + binascii.hexlify(k)
-        print '    * pub: ' + binascii.hexlify(p)
+        print '  * fingerprint: ' + binascii.hexlify(fpr)
+        print '  * chain code: ' + binascii.hexlify(c)
+        print '  * private: ' + binascii.hexlify(k)
+        print '  * public: ' + binascii.hexlify(p)
         #print b58xprv(fpr, kc, cc, depth, i)
         #print b58xpub(fpr, pc, cc, depth, i)
     print
