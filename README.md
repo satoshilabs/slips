@@ -23,8 +23,9 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0016](slip-0016.md) | Format for password storage and its encryption                        | Standard      | Draft    |
 | [SLIP-0017](slip-0017.md) | Elliptic Curve Diffie-Hellman using deterministic hierarchy           | Standard      | Draft    |
 | [SLIP-0018](slip-0018.md) | reserved (CoSi)                                                       | Standard      | Draft    |
-| [SLIP-0019](slip-0018.md) | Proof of Ownership                                                    | Standard      | Draft    |
-| [SLIP-0020](slip-0018.md) | Proof of User Confirmation                                            | Standard      | Draft    |
+| [SLIP-0019](slip-0019.md) | Proof of Ownership                                                    | Standard      | Draft    |
+| [SLIP-0020](slip-0020.md) | Proof of User Confirmation                                            | Standard      | Draft    |
+| [SLIP-0021](slip-0021.md) | Hierarchical derivation of symmetric keys                             | Standard      | Draft    |
 | [SLIP-0032](slip-0032.md) | Extended serialization format for BIP-32 wallets                      | Standard      | Draft    |
 | [SLIP-0039](slip-0039.md) | Shamir's Secret-Sharing for Mnemonic Codes                            | Standard      | Draft    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Draft    |
