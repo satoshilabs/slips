@@ -1,9 +1,11 @@
+=SLIP-3301 : Universal Addresses=
+
 <pre>
-  Number: SLIP-3301
-  Title: Universal Addresses
-  Author: Ty Everett <ty@universaladdresses.com>
-  Status: Draft
-  Type: Informational
+  Number:  SLIP-3301
+  Title:   Universal Addresses
+  Type:    Informational
+  Authors: Ty Everett <ty@universaladdresses.com>
+  Status:  Draft
   Created: 2019-12-23
 </pre>
 
@@ -19,17 +21,17 @@ As the Bitcoin and wider cryptocurrency community has matured, numerous address 
 
 This SLIP draws on concepts from BIP32, BIP43 and BIP44. The reader is encouraged to familiarize themselves with those BIPs before attempting to read and understand this BIP.
 
-===A Note on Annotations and Rationale in this BIP===
+===A Note on Annotations and Rationale in this SLIP===
 
 Design decisions have been made with regard to many respects of this BIP. Where appropriate, annotations <ref name="example">This is the example annotation appearing in the “A Note on Annotations and Rationale in this BIP” subsection of the “Specification” section.</ref> have been added. Justifications can be found in the “Rationale” section, along with a few explanatory Q&A-style points about potential implementation concerns.
 
-===A Note on Terminology Used In This BIP===
+===A Note on Terminology Used In This SLIP===
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", “SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 
 ===Derivation Path Levels for Universal Addresses===
 
-Implementers of SLIP3301 MUST use the below BIP32 derivation path levels for Universal Addresses; apostrophe denotes hardened BIP32 derivation:
+Implementers of SLIP-3301 MUST use the below BIP32 derivation path levels for Universal Addresses; apostrophe denotes hardened BIP32 derivation:
 
 <pre>
 m / 3301’ / entity / coin / shield
@@ -60,13 +62,13 @@ I define that the first level of BIP32 derivation to be used in Universal Addres
 
 ===Serialization Format===
 
-The serialized address format for SLIP3301 Universal Addresses SHALL be the same format described in the “Serialization Format” subsection of the “Specification: key derivation” section of BIP32, subject to the following considerations:
+The serialized address format for SLIP-3301 Universal Addresses SHALL be the same format described in the “Serialization Format” subsection of the “Specification: key derivation” section of BIP32, subject to the following considerations:
 
-* Implementers of SLIP3301 Universal Addresses MUST encode Universal Addresses using the same base58 format as current extended public keys for interoperability with existing software.
+* Implementers of SLIP-3301 Universal Addresses MUST encode Universal Addresses using the same base58 format as current extended public keys for interoperability with existing software.
 
-* For additional privacy, implementers of SLIP3301 Universal Addresses SHOULD substitute the 32-bit “parent key fingerprint” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true parent key fingerprint if they find it useful.
+* For additional privacy, implementers of SLIP-3301 Universal Addresses SHOULD substitute the 32-bit “parent key fingerprint” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true parent key fingerprint if they find it useful.
 
-* For additional privacy, implementers of SLIP3301 Universal Addresses SHOULD substitute the 32-bit “child number” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true child number if they find it useful.
+* For additional privacy, implementers of SLIP-3301 Universal Addresses SHOULD substitute the 32-bit “child number” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true child number if they find it useful.
 
 ===URL-Style Query Parameters for Denotability of Recipient-Specified Currency Acceptance Preferences===
 
@@ -78,11 +80,11 @@ The sender wallet MAY auto-select a currency for the sender if there is only one
 
 ===Future Possibilities for Backwards-Compatible Improvements to Universal Addresses===
 
-A future SLIP MAY specify a URI-style format (e.g. “pay:…”) and, if a URI-style format for Universal Addresses is proposed, the proposing SLIP SHOULD consider removing unnecessary fields (version bytes, depth, parent key fingerprint and child index) from the base58-encoded string. However, to reduce the friction for adoption of Universal Addresses by the community and to promote compatibility with existing software, those changes are not proposed as part of this BIP. SLIP3301 Universal Addresses can be converted to a new, shorter format in the future<ref name="new-format-convertibility">Conversion can occur by simply deserializing the string, removing the unnecessary fields and re-serializing to the new format.</ref>. Libraries, wallets and BIPs building on top of and claiming support for SLIP3301 Universal Addresses MUST maintain seamless backwards-compatible support for the use of standard BIP32-serialized extended public keys as SLIP3301 Universal Addresses.
+A future SLIP MAY specify a URI-style format (e.g. “pay:…”) and, if a URI-style format for Universal Addresses is proposed, the proposing SLIP SHOULD consider removing unnecessary fields (version bytes, depth, parent key fingerprint and child index) from the base58-encoded string. However, to reduce the friction for adoption of Universal Addresses by the community and to promote compatibility with existing software, those changes are not proposed as part of this BIP. SLIP-3301 Universal Addresses can be converted to a new, shorter format in the future<ref name="new-format-convertibility">Conversion can occur by simply deserializing the string, removing the unnecessary fields and re-serializing to the new format.</ref>. Libraries, wallets and BIPs building on top of and claiming support for SLIP-3301 Universal Addresses MUST maintain seamless backwards-compatible support for the use of standard BIP32-serialized extended public keys as SLIP-3301 Universal Addresses.
 
-===SLIP3301 Universal Address Validity Checks===
+===SLIP-3301 Universal Address Validity Checks===
 
-A serialized BIP32 extended public key string that is encoded in base58 format with a valid 32-bit checksum SHALL be regarded as a valid SLIP3301 Universal Address if the following are true:
+A serialized BIP32 extended public key string that is encoded in base58 format with a valid 32-bit checksum SHALL be regarded as a valid SLIP-3301 Universal Address if the following are true:
 # The string meets the BIP32 requirement that the specified point lies on the secp256k1 curve, and is otherwise representative of a valid BIP32 public node.
 # The version bytes are equal to 0x0488B21E for the key <ref name="unified-version-prefix">Private keys are never used, and since the Bitcoin Testnet (normally 0x043587CF) is covered by level 3 SLIP44 derivation, no other version prefixes are needed.</ref>.
 # The depth byte is equal to 0x02.
@@ -92,7 +94,7 @@ A serialized BIP32 extended public key string that is encoded in base58 format w
 
 BIP44-compliant wallet Implementers SHOULD use the same BIP32 root node as is presently in use for each of their users. This generally reduces complexity and maintains compatibility with existing software.
 
-This SLIP mandates that it is absolutely REQUIRED that the community agree on SLIP44 designations for each coin. Project leaders MUST apply for SLIP44 allocations if they have yet to do so and want their projects to be compatible with this BIP<ref name="no-compatibility-guarantee">Not all cryptocurrency projects will be initially compatible with SLIP3301 Universal Addresses out of the box. Does that make these addresses non-universal? How non-universal is UPnP? This SLIP defines a standard that works for most use-cases and most currencies most of the time. If enough people adopt it, non-compliant projects MAY find a way to join the standard.</ref>.
+This SLIP mandates that it is absolutely REQUIRED that the community agree on SLIP44 designations for each coin. Project leaders MUST apply for SLIP44 allocations if they have yet to do so and want their projects to be compatible with this BIP<ref name="no-compatibility-guarantee">Not all cryptocurrency projects will be initially compatible with SLIP-3301 Universal Addresses out of the box. Does that make these addresses non-universal? How non-universal is UPnP? This SLIP defines a standard that works for most use-cases and most currencies most of the time. If enough people adopt it, non-compliant projects MAY find a way to join the standard.</ref>.
 
 ===Universal Address Sharing===
 
@@ -132,7 +134,7 @@ Optionally, they can append URL-style query parameters to denote one or more cur
 
 ===Example 2: Multi-currency Wallet===
 
-A user sees a SLIP3301 Universal Address on a website:
+A user sees a SLIP-3301 Universal Address on a website:
 
 <pre>
 xpub6A6MPF2tU1tMQXuhyAAXLDWKMuw3GRwZEFUAXXwHuykZoUcyUn24gN7RPuy5xZXj6zSqWXFcVjTJEnnX5Qh4pjJMnGbjZkuXHFKFy4U22AX?accept=BTC,LTC
@@ -238,7 +240,7 @@ A: BIP43 recommends that version bytes do not change across use-cases. If a new 
 
 ===Q: XYZCoin is incompatible with this SLIP because BIP32 derivation will not work with Ed25519 or some other cryptography===
 
-A: SLIP3301 Universal Addresses were designed to work well for most people and most cryptocurrency projects most of the time. Since anyone is free to start a new project, it is entirely possible that existing or future projects are non-compliant with this BIP. Consideration should be given to past projects which existed before this BIP’s publication, since they could not have known about this SLIP at the time of their inception. However, the benefits to users and the wider cryptocurrency ecosystem in implementing a standard address format MUST NOT be underestimated.
+A: SLIP-3301 Universal Addresses were designed to work well for most people and most cryptocurrency projects most of the time. Since anyone is free to start a new project, it is entirely possible that existing or future projects are non-compliant with this BIP. Consideration should be given to past projects which existed before this BIP’s publication, since they could not have known about this SLIP at the time of their inception. However, the benefits to users and the wider cryptocurrency ecosystem in implementing a standard address format MUST NOT be underestimated.
 
 ==References==
 
