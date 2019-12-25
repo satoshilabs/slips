@@ -251,5 +251,5 @@ A: SLIP-3301 Universal Addresses were designed to work well for most people and 
 * BIP32
 * BIP43
 * BIP44
-* [SLIP-44](slip-0044.md)
+* SLIP-44
 * RFC-2119
