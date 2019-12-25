@@ -1,0 +1,253 @@
+<pre>
+  Number: SLIP-3301
+  Title: Universal Addresses
+  Author: Ty Everett <ty@universaladdresses.com>
+  Status: Draft
+  Type: Informational
+  Created: 2019-12-23
+</pre>
+
+==Abstract==
+
+A universally recognized and accepted cryptocurrency address format would allow merchants, exchanges and users to more easily coordinate transactions and conduct business. I propose a new address format not specific to any cryptocurrency that provides strong cryptographic security while maintaining or improving the level of transactional privacy specific to each underlying currency. BIP32 derivation permits compatibility with existing HD wallets, reducing implementational friction across the ecosystem. BIP44 numberings at the coin-selection level allow new coins to be used with the same Universal Addresses, while URL-style query parameters dictate which currencies a user prefers to receive.
+
+As the Bitcoin and wider cryptocurrency community has matured, numerous address formats have been devised. Some projects use their own format, while others use base-58 or hex-encoded strings. Some even have identical addresses, creating confusion for users and a potential for the loss of funds. While each format has its unique set of advantages and disadvantages, they all have one thing in common: they are specific to a single currency and not to the user, who may or may not use and accept a great many currencies. I propose the use of BIP32 extended public key nodes as a Universal Address format, because no cryptocurrency project exists in a vacuum.
+
+==Specification==
+
+===Pre-requisite Knowledge===
+
+This SLIP draws on concepts from BIP32, BIP43 and BIP44. The reader is encouraged to familiarize themselves with those BIPs before attempting to read and understand this BIP.
+
+===A Note on Annotations and Rationale in this BIP===
+
+Design decisions have been made with regard to many respects of this BIP. Where appropriate, annotations <ref name="example">This is the example annotation appearing in the “A Note on Annotations and Rationale in this BIP” subsection of the “Specification” section.</ref> have been added. Justifications can be found in the “Rationale” section, along with a few explanatory Q&A-style points about potential implementation concerns.
+
+===A Note on Terminology Used In This BIP===
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", “SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+
+===Derivation Path Levels for Universal Addresses===
+
+Implementers of SLIP3301 MUST use the below BIP32 derivation path levels for Universal Addresses; apostrophe denotes hardened BIP32 derivation:
+
+<pre>
+m / 3301’ / entity / coin / shield
+</pre>
+
+====Level 1: Denotes Use with Universal Addresses====
+
+The top-level derivation simply denotes the use of this node with Universal Addresses. Primarily, it’s purpose is to isolate this use-case from other uses of the same BIP32 node (notably BIP44 wallets).
+
+====Level 2: Recipient Determines Index of Address to Share====
+
+This is the level at which the Universal Addresses allocated by a recipient's wallet are to be split off; one for each sender to whom the recipient has given an address. Starting at index 1 (0 is reserved for future use), each Universal Address SHOULD be generated canonically. The keys generated at this level are the ones to be shared from the sender to the recipient. The recipient may then derive a level 3 key based on this key and the currency they wish to send. There is no need for the sender to obtain a new Universal Address from the recipient for each of their subsequent transactions.
+
+====Level 3: Sender Selects and Derives Address for the Currency They Wish to Send====
+
+The sender receives the level 2 key from the recipient formatted as a Universal Address (see Serialization Format section below). Based on the BIP44 coin assignment number for the coin the sender would like to send (maintained by Satoshi Labs as SLIP44), the sender makes the appropriate derivation at this level.
+
+====Level 4: Sender Increments Shield Counter to Improve Privacy (“Enhanced Privacy Mode”)====
+
+The shield counter starts at child #1 (#0 is reserved for future use). If a higher level of privacy is desired, the sender MAY increment the shield counter once per transaction. In this way, individual addresses are not re-used. Additionally, the sender MAY split a payment into multiple separate transactions, each destined for a different blockchain-level address <ref name="multi-transactional-benefits">For certain blockchains that do not implement transactional “inputs and outputs”, this permits transactions to be made in a way that permits single-use addressing. For these coins, when the original recipient wishes to spend the received coins which are in multiple addresses, they may do so in one of two ways:
+# If the original recipient wishes to send all received coins out as one blockchain-level transaction and from one blockchain-level address, they may first create many blockchain-level transactions collecting the coins into a single “change address” and then spend the coins all at once from that address to the next recipient.
+# If the original recipient wishes to spend using multiple addresses (i.e. the next recipient also uses Universal Addresses), the original recipient may simply empty each of the addresses they would like to spend from; the original recipient may either choose to forward all coins in a given address to the next recipient, or to forward some of the coins to the next recipient and the rest to a new “change address.” This same model can apply to Bitcoin.
+In any case, the advantage is that it makes for better privacy because multi-transactional payments do not permit correlation of any of the outputs to any single user. It is also possible to send one transaction on blockchain A and another transaction on blockchain B as part of the same payment.</ref>. If the sender does not increment the shield counter for every transaction, the sender MUST always use child #1 as the public key component of the blockchain-level address.
+
+===Reservation of 3301 as a BIP43 Purpose===
+
+I define that the first level of BIP32 derivation to be used in Universal Address allocation from the root BIP32 node SHALL be 3301, which conforms to the BIP43 recommendation that top-level derivations be based on the number assigned to a BIP. The BIP43 purpose for this SLIP is “Universal Addresses.”
+
+===Serialization Format===
+
+The serialized address format for SLIP3301 Universal Addresses SHALL be the same format described in the “Serialization Format” subsection of the “Specification: key derivation” section of BIP32, subject to the following considerations:
+
+* Implementers of SLIP3301 Universal Addresses MUST encode Universal Addresses using the same base58 format as current extended public keys for interoperability with existing software.
+
+* For additional privacy, implementers of SLIP3301 Universal Addresses SHOULD substitute the 32-bit “parent key fingerprint” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true parent key fingerprint if they find it useful.
+
+* For additional privacy, implementers of SLIP3301 Universal Addresses SHOULD substitute the 32-bit “child number” with 0x00000000 before disclosing the Universal Address to the sender. In these cases, the recipient has the sole responsibility of keeping track of the true child number if they find it useful.
+
+===URL-Style Query Parameters for Denotability of Recipient-Specified Currency Acceptance Preferences===
+
+When the recipient wishes to specify which currencies it prefers to receive, a URL-style query parameter MAY be appended to the end of the Universal Address. If provided, the query parameter MUST have the property of lowercase “accept” and its value MUST be a comma-delimited list of one or more SLIP44 currency symbols. Future BIPs MAY propose new query parameters that can also be appended. All such parameters are strictly OPTIONAL in this specification. Universal addresses with no appended query parameters MUST be regarded as valid.
+
+When a sender wallet encounters a Universal Address with an appended “accept” URL-style query parameter, it SHOULD show a list of currencies in its user interface that correspond to the ones denoted by the value of the parameter. The sending wallet SHOULD also remove currencies from the list that it does not support.
+
+The sender wallet MAY auto-select a currency for the sender if there is only one common currency between the “accept” list and the “supported currencies” list of the sender wallet. Auto-selection based on the sender’s balance or other factors MAY also be performed.
+
+===Future Possibilities for Backwards-Compatible Improvements to Universal Addresses===
+
+A future SLIP MAY specify a URI-style format (e.g. “pay:…”) and, if a URI-style format for Universal Addresses is proposed, the proposing SLIP SHOULD consider removing unnecessary fields (version bytes, depth, parent key fingerprint and child index) from the base58-encoded string. However, to reduce the friction for adoption of Universal Addresses by the community and to promote compatibility with existing software, those changes are not proposed as part of this BIP. SLIP3301 Universal Addresses can be converted to a new, shorter format in the future<ref name="new-format-convertibility">Conversion can occur by simply deserializing the string, removing the unnecessary fields and re-serializing to the new format.</ref>. Libraries, wallets and BIPs building on top of and claiming support for SLIP3301 Universal Addresses MUST maintain seamless backwards-compatible support for the use of standard BIP32-serialized extended public keys as SLIP3301 Universal Addresses.
+
+===SLIP3301 Universal Address Validity Checks===
+
+A serialized BIP32 extended public key string that is encoded in base58 format with a valid 32-bit checksum SHALL be regarded as a valid SLIP3301 Universal Address if the following are true:
+# The string meets the BIP32 requirement that the specified point lies on the secp256k1 curve, and is otherwise representative of a valid BIP32 public node.
+# The version bytes are equal to 0x0488B21E for the key <ref name="unified-version-prefix">Private keys are never used, and since the Bitcoin Testnet (normally 0x043587CF) is covered by level 3 SLIP44 derivation, no other version prefixes are needed.</ref>.
+# The depth byte is equal to 0x02.
+# Notwithstanding the above, validity assertions SHALL NOT take into account the contents of the 32-bit parent key fingerprint or the 32-bit child number, except that these fields MUST be present in some form and that the final double-sha256 checksum MUST be correct.
+
+===Implementation Notes===
+
+BIP44-compliant wallet Implementers SHOULD use the same BIP32 root node as is presently in use for each of their users. This generally reduces complexity and maintains compatibility with existing software.
+
+This SLIP mandates that it is absolutely REQUIRED that the community agree on SLIP44 designations for each coin. Project leaders MUST apply for SLIP44 allocations if they have yet to do so and want their projects to be compatible with this BIP<ref name="no-compatibility-guarantee">Not all cryptocurrency projects will be initially compatible with SLIP3301 Universal Addresses out of the box. Does that make these addresses non-universal? How non-universal is UPnP? This SLIP defines a standard that works for most use-cases and most currencies most of the time. If enough people adopt it, non-compliant projects MAY find a way to join the standard.</ref>.
+
+===Universal Address Sharing===
+
+Universal Addresses SHOULD be viewed as having two possible security models: they can be fully public or they can be kept secret between the recipient and exactly one sender. Fully public addresses are OK, because Universal Addresses do not claim to provide confidentiality about the amounts and currencies received by the recipient. Fully private addresses, where the recipient allocates a new address for every sender (such that each sender has their own designated Universal Address for the recipient, but no sender may learn the Universal Address of any other senders to the recipient) are also secure and have other benefits<ref name="multi-transactional-benefits" />. However, other security models have inherent weaknesses<ref name="weak-group-security">In particular, situations where a group of entities know a single Universal Address for a member, and where the transactions of the members of the group which involve the known Universal Address are not intended to be public should be avoided. By publishing the known Universal Address, a single member of the group can compromise the privacy of the transactions of all group members involving the known Universal Address. Each recipient SHOULD take care to allocate new Universal Addresses for each entity with whom they intend to transact business; even if an allocated address never gets used by a sender, a completely new address SHOULD be allocated by the recipient for each potential sender when privacy is strictly required because the previously-designated sender can learn the transactional activity between the newly-designated sender and the recipient if addresses are reused.</ref> and SHOULD definitely be avoided.
+
+===Balance Calculation Algorithm===
+
+Similar to current extended public key-based wallets, inquiring about the balance of a Universal Address involves querying for transactions related to the blockchain-level addresses derived from the root node. The only difference with Universal Addresses is that wallets SHOULD query all blockchains for which a known balance is desired. Higher zero-use gap toleration decreases the likelihood of missing coins. Wallets SHOULD keep track of the Universal Addresses they allocate.
+
+==Examples==
+
+Three situations that utilize Universal Addresses will be described; the first from the perspective of a recipient and the second two from the perspective of senders.
+
+===Example 1: Recipient Usage===
+
+A user generates a BIP32 private root node and wants to give out a Universal Address:
+
+<pre>
+xprv9s21ZrQH143K2eR2vYd9i6YvrFUojaL3ecK2hY4zfabMgu6okTk2s6WxnQmPYA45apCKWiUnHrQsdvh6ER4Leaaa7ehDx5KZtDUbAcgfGBy
+</pre>
+
+The user will perform a hardened level 1 derivation to find private child #3301 of their root node:
+
+<pre>
+xprv9umttUfc6MFTxANAkz8fWE4hHN99xra5GwiP9Er91M69mBso9hAhAgYu2tXfvXaAs5AHWAPwZCSUT4SzkgBqtuNYdHLcp1tSsPDGmAg9ugW
+</pre>
+
+The user will perform a public derivation to arrive at the #1 child, as this is their first Universal Address:
+
+<pre>
+xpub6A6MPF2tU1tML7JJa98pzmSgDr7V8JuaKCrYu4tjgq4ZLFKTvF4eW7y3c28ye3db9nk3XVvPBTwDA7VB7hch4aj1aQKrCj7FoW78vTJw8zj
+</pre>
+
+This is the Universal Address. Assuming the user is OK with accepting any SLIP44 cryptocurrency, they can share the Universal Address with any sender or publish it online.
+
+Optionally, they can append URL-style query parameters to denote one or more currencies they prefer to accept with this address. Other query string parameters may be proposed by future BIPs. This SLIP only reserves the “accept” parameter for use as a comma-delimited list of SLIP44 currency symbols, as defined in the “URL-Style Query Parameters for Denotability of Recipient-Specified Currency Acceptance Preferences” subsection of the “Specification” section above.
+
+===Example 2: Multi-currency Wallet===
+
+A user sees a SLIP3301 Universal Address on a website:
+
+<pre>
+xpub6A6MPF2tU1tMQXuhyAAXLDWKMuw3GRwZEFUAXXwHuykZoUcyUn24gN7RPuy5xZXj6zSqWXFcVjTJEnnX5Qh4pjJMnGbjZkuXHFKFy4U22AX?accept=BTC,LTC
+</pre>
+
+The user’s wallet notices that the address indicates a preference for either Bitcoin or Litecoin, so the UI presents a choice. The user selects Litecoin, so the wallet searches for LTC in the SLIP44 currency list and therefore derives the #2 child node of the Universal Address:
+
+<pre>
+xpub6D76wrzT2eTJH5EaMdcK8Wkej36nBakXFwMr79HLJMxga4giaehK8RLFiCTiAkBt9W8saivsX4n2ot9reUt4ePbSUhEFHK1NGkKiPhWhQZH
+</pre>
+
+This particular wallet does not support "Enhanced Privacy Mode", so it will simply derive the #1 child of the Litecoin node instead of calculating the correct shield value:
+
+<pre>
+xpub6E9man3MPJXdrgjHDqhkJuSjG3j9TBfESbxppRA1fF5pq9KEDCQegPfa76e9BT3Nnhwpy9krXrLTRsYx8ccFXrMKTuz6hH2ZEanhG1tC59a
+</pre>
+
+The Litecoin address corresponding to the derived node is:
+
+<pre>
+LXDxiYDVosUg3hKwJ4yP24EfdkRuNumLs5
+</pre>
+
+The user completes their transaction with Litecoin.
+
+===Example 3: "Enhanced Privacy Mode" and Universal Address Reuse===
+
+In a (semi)-private chat, a user receives a Universal Address:
+
+<pre>
+xpub6AJUhNSZRaZS7d9eJ2jyyuNMbkMWQgHNEgDt9rC3WJfkXvQDAKu9LZLhMhVkeot66EtEtBJK48Ca3qNfrjBH1otkBc2CNPwaTMeHSh3TvL1
+</pre>
+
+The user received this particular Universal Address some months ago<ref name="address-to-identity-maps">Since Universal Addresses can be reused, the user’s wallet could keep an associative list mapping names to Universal Addresses. Wallets MAY consider making this look like an address book, where the user can add their associates as contacts.</ref>, and has used to for 17 previous Bitcoin transactions and 2 Litecoin transactions to this recipient.
+
+The user wants to send 2 BTC to the recipient. The user’s wallet has two unspent outputs in different places; the first for 1.5 BTC and the second for 1 BTC.
+
+The wallet notices that the recipient’s Universal Address indicates no preference for which currency to receive. Thus, the UI presents a list of all supported currencies for which the sender has a balance. The sender selects Bitcoin, so the wallet searches for BTC in the SLIP44 currency list and therefore derives the #0 child node of the Universal Address:
+
+<pre>
+xpub6CUu5jU1UVXsB3zstbr6MDZcmZy9SAEfsTtm81iR2foAtRZ34cb9jnr4D1jcQxKG9y9fMhVeqYy9kC3j4jidyhbrRuX6nXiYgSdQSwZmzVi
+</pre>
+
+Since the sender’s wallet supports "Enhanced Privacy Mode", it will increment the Bitcoin shield counter starting at child #1 and querying the blockchain for each shielded address to see if it has ever been used<ref name="binary-search-and-caching">Wallets MAY use a binary search-style querying strategy to speed up this process as opposed to a linear search of the blockchain. The wallet MAY also cache the highest known-to-be-used shield counter for each previously-checked currency of each Universal Address it has seen in the past.</ref>. The wallet sees that the shield counter is at #17<ref name="always-check-shield-counters">Wallets SHOULD always check shield counters even if cached data exists, because a publicly-known Universal Address could have been used by another sender. However, caching speeds up future checks because the wallet knows that the shield value is not less than the cached value.</ref>. Since the wallet uses “Enhanced Privacy Mode”, it MUST NOT use shielded children less than child #18. For privacy, the wallet MAY also split the payment into two or more transactions<ref name="multi-blockchain-payments">It is also possible for the sender to conduct a multi-blockchain payment. For example, the sender might send one Bitcoin transaction and two Litecoin transactions. The sender SHOULD only attempt this with communication and coordination with the recipient to avoid confusion. The sender always has an incentive to ensure the recipient properly receives the payment.</ref>. The wallet will now derive the #18 and #19 children of the Bitcoin node:
+
+<pre>
+xpub6EvkmcciNXPHVoiSP4sV21mgAWi3MAzJtvwRFXoNuUusADN1KU9eZ9REkuD7PgtRDR1ggKRSvci8L6uhegmcoNwSP8QDfSqRH66iC6oGYWs
+=== BTC Address ==>
+1F2idiEsCTBN6ZrzkLE7JTddaJPubYet5m
+</pre>
+
+and
+
+<pre>
+xpub6EvkmcciNXPHWR7ZLh8XJz74CZh8NDszKBzEBMS7xFDgTB7aoLbJwtzwV1CdKM6JvwrGowU1FoMpf1uZuUfBqX4BpHqMGQocTPev98qZ3Wf
+=== BTC Address ==>
+1PpcyFv46NvqJusLwfrv6dkw3K9z434hJV
+</pre>
+
+The wallet will now spend the first of its outputs (1.5 BTC) entirely to child #18, and 0.5 BTC from the second output will be spent to child #19. The remaining 0.5 BTC from the second output will be sent back to a change address. In this way, it is impossible for an observer to correlate that the two outputs originally belonged to the same sender or were part of the same payment<ref name="no-sender-output-correlation">In typical Bitcoin transactions, such correlations are possible and are widely used for “blockchain forensics.” This new mode of wallet operation represents a substantial privacy improvement for Bitcoin and for all compliant<ref name="no-compatibility-guarantee" /> SLIP44 cryptocurrencies.</ref>.
+
+==Motivation==
+
+Addresses are a tedious part of living in the cryptocurrency-enabled world. With hundreds of contacts and dozens of popular currencies, keeping track of which people provided which addresses for which coins makes life all the more difficult. Widespread adoption of a Universal Addressing format would allow users to share one address and accept many cryptocurrencies in the same wallet. As merchants and exchanges support and use new currencies, new addresses do not need to be exchanged among users. When sender wallets support “Enhanced Privacy Mode”, a substantial gain in transactional privacy is also obtained by the use of Universal Addresses.
+
+==Rationale==
+
+Design decisions made with regard to this SLIP are documented below in a Q&A/interview-style format:
+
+===Q: Will it be easy to lose coins since an address is no longer associated with a single cryptocurrency?===
+
+A: This is a valid concern, but there are quite a large number of projects without unique address formats. Specifically, ERC20 coins use hex strings while Bitcoin SV and Bitcoin both use base58. Universal Addresses will be a net benefit because each project gets its own pool of address space. Additionally, the “accept” parameter might only contain a single SLIP44 symbol, making Universal Addresses the de facto address format for many projects.
+
+Wallets implementing Universal Addresses SHOULD append the “accept” parameter, and senders SHOULD NOT send coins that are not listed by the “accept” header when specified. Also, the money wouldn't actually be lost in these situations. Assuming the root private node is safe, derivation of the right path will make recovering coins fairly straightforward. Additionally, high quality multi-currency wallet implementations should consider scanning popular blockchains for transactions even if those chains are otherwise unsupported. This can alert the user in cases where unsupported coins were received.
+
+===Q: For split transaction payments, no single TXID exists. This makes accounting harder.===
+
+A: In the vast majority of cases, the sender should get the recipient to simply come up with an invoice number or “payment ID” that can be communicated to the sender for their records. Listing all relevant TXIDs is another possible solution. Calculating the bitwise XOR of all relevant TXIDs to create a single “MTXID” is also possible and could be the subject for a future BIP. In any case, it is a valid concern that “Enhanced Privacy Mode” deviates from the standard transactional model. If a single TXID is strictly required, a multi-transactional payment should not be used.
+
+===Q: It is the sender’s choice whether to use a split payment or “Enhanced Privacy Mode”. If they choose not to do so, can’t the recipient’s privacy be harmed?===
+
+A: In existing implementations, the sender can breach their own privacy in many ways by revealing participation in a transaction. The onus is always on the sender of a transaction to ensure that their privacy is protected since the recipient does not control whether the sender uses “Enhanced Privacy Mode." With Universal Addresses, each sender makes their own choice about privacy and their decision does not effect the privacy of the recipient or any other senders. In any case, future BIPs might also propose recipient-controlled preferences for privacy modes using additional URL-like query parameters.
+
+===Q: Can’t a sender publish the recipient’s non-public Universal Address to compromise the recipient's privacy?===
+
+A: Recipients should only share the same non-public Universal Address with one sender. Thus, the impact of such a disclosure is limited to transactions strictly involving this particular sender. Refer to the “Universal Address Sharing“ subsection of the “Specification” section and <ref name="weak-group-security" /> for further details. It is also worth noting that by revealing the non-public Universal Address, the sender explicitly notifies the recipient that they have breached the recipient's implicit trust relationship. Since the recipient gave the non-public Universal Address solely to this sender and since the recipient knows that they were not the one to have published it, the recipient can be certain that the sender published the address. The sender will lose the implicit trust of the recipient to maintain privacy.
+
+===Q: Suppose a recipient publishes their own previously-undisclosed non-public Universal Address. Would this reveal that two or more spent outputs were from the same sender?===
+
+A: Even if the Universal Address is publicly revealed, it does not prove that any two transactions sent from different source addresses are part of the same payment or even that they came from the same sender. Notwithstanding the above, the sender should understand that their privacy is determined by their own actions, not the actions of the recipient. If the sender failed to re-use addresses and then the recipient published the Universal Address revealing a pattern of the sender’s single-address activity, the recipient is not liable for the sender’s negligence.
+
+===Q: Universal Addresses are long. What can be done to shorten them?===
+
+A: Elimination of version bytes, parent fingerprint, child number and node depth in combination with the creation of a URI prefix would decrease length and would also make for another great BIP.
+
+===Q: Is it likely that people will get Universal Addresses mixed up with normal BIP32 extended public keys?===
+
+A: As they are currently used, extended keys are generally distributed at the root level. People may attempt to differentiate them because the node depth will always be 2 for Universal Addresses. Additionally, an extended public key is probably a Universal Address if its parent fingerprint and child index have been zeroed, but Universal Addresses may also exist with these values populated. A future SLIP proposing a URI-denoted identifier (“pay:…”) would also solve this problem. Ideally such a SLIP would also reduce the length of Universal Addresses. In any case, the likelihood for mistakes is small considering that BIP32 extended public keys are typically only used by advanced users.
+
+===Q: Should the version bytes defined in BIP32 be removed or changed for use with this BIP?===
+
+A: BIP43 recommends that version bytes do not change across use-cases. If a new URI scheme is proposed for Universal Addresses in a future BIP, the effective result would be that such an identifier could replace the version bytes, because it would serve to identify the resource as a Universal Address. Version bytes are maintained by this SLIP to create full backwards-compatibility with BIP32 extended public keys.
+
+===Q: XYZCoin is incompatible with this SLIP because BIP32 derivation will not work with Ed25519 or some other cryptography===
+
+A: SLIP3301 Universal Addresses were designed to work well for most people and most cryptocurrency projects most of the time. Since anyone is free to start a new project, it is entirely possible that existing or future projects are non-compliant with this BIP. Consideration should be given to past projects which existed before this BIP’s publication, since they could not have known about this SLIP at the time of their inception. However, the benefits to users and the wider cryptocurrency ecosystem in implementing a standard address format MUST NOT be underestimated.
+
+==References==
+
+<references />
+
+==See Also==
+
+* BIP32
+* BIP43
+* BIP44
+* [SLIP-44](slip-0044.md)
+* RFC-2119
