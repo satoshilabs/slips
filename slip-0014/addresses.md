@@ -53,6 +53,40 @@ index | address                              | public key                       
    8  | `XteBgFFTpGz2NNedqsZEcqPz5m31AQBBYz` | `0260ec3beb9f51b4de98fe7f4c13814077603b6211c9e6acdd1c7b0cc796450d79` | `XK13VgxcbF3h9Hr9g5bn1uuhtuaNsfEbcFzQxUsowVVeV7LKGQRy`
    9  | `XpkAwbPzQFdLmuAeYs7BLJfHfXL163QatG` | `027df3bcb58f397d99ec944ae74b15f15bf6ab24190e11e7d3fc164107eb36258b` | `XEq1Rvq4AQKNm52pqiaeUnyG6DZ9Zf6EvrmaZ23Xx2aVrUPYkq6b`
 
+## Groestlcoin
+
+`m/44'/17'/0'/0/i`
+
+index | address                              | public key                                                           | private key
+------|--------------------------------------|----------------------------------------------------------------------|------------
+   0  | `Fj62rBJi8LvbmWu2jzkaUX1NFXLEqDLoZM` | `03b85cc59b67c35851eb5060cfc3a759a482254553c5857075c9e247d74d412c91` | `KyEjYKtiAqyERxq6f9SMQ29GinrThjVrEmfdUrKZz6ZPnPxr8Hor`
+   1  | `FYy3bTDYJiSaNhh4d2ptHGwAPNRc6heKy2` | `02cf5126ff54e38a80a919579d7091cafe24840eab1d30fe2b4d59bdd9d267cad8` | `KyYazbWftZUkCf2k9YFQr6UXtfjAw3vnZXyep6pz9PWATWm6wKaL`
+   2  | `FXHDsC5ZqWQHkDmShzgRVZ1MatpWhwxTAA` | `0331693756f749180aeed0a65a0fab0625a2250bd9abca502282a4cf0723152e67` | `L189RB5TvaJX6p3mnjaoJ12R2GGzdxu1iDUvJPdT3d9Wh8c3g9q9`
+   3  | `FtM4zAn9aVYgHgxmamWBgWPyZsb6RhvkA9` | `0286b2a6246bfed0f9a3a4e2ccb49b6989fe078177580b763bbe01e3d4fdfecacd` | `KwwoyZrELnXJc1mvuviWCWc3xSZDBUfnpgwee81B6H83myTQ43y9`
+   4  | `FjE6TV6jcN12fbrzwn44GFDcmFQvU9driV` | `03c20962ab16f4d97a4f6f8b83f73a05457794ced25debbf8299336e6ac48bf40d` | `L3rGDCVjokG5caEwpxkQSUuDAQc7arsHCzSiFgzqMpJckyVVXAv9`
+   5  | `FqN585nhGJGcNohLffk9qc1X6qZjuqxQhQ` | `021283eb77c39b69a4a5920191e884b71d202fe658057b5b2258db357b8731e707` | `KwhgmgqhztPTRKSTwnYz6QpFVQNL9BGfgvfHLxsQrvuAZb4kDhRR`
+   6  | `FjuS7xtFhn1KK5jgiTTtVuYiiDivv6heAh` | `03b66c434a1981f85fdb1c8aaa8f6fd2e02dd267b72f832f3fb2a82b25c24c7d41` | `KxtPi5etKLJcF2tzis3ENn8LSCXy36qU6pJqD5J6C9TwYP3qnsFm`
+   7  | `Fe9N7LyoTE58PmQ9N2nSAEeeDEbBhS1NLt` | `0344853499594b040ca8c4f605b5f5005d0c4fdf475cd75f158444c6d86b11f3ca` | `Kx4cu3FjSujkjTQVz8LDArXkpScgyMbtJDHEWWaHsrmnTXmtW9M5`
+   8  | `FhuvBfBm8gBfhqM93NzPaVXef9Fv95j2rG` | `03331f59b83c3e2274d4b25ca7643f55822e217339132f26e6ce2db82b6e1f8062` | `L3UA7k9U8x5PTc7XQoDtzM5qisNF7XrEkhufF6X73D4iahSMn7t2`
+   9  | `Fn5sfR7FifuLYuBjnAtwreGxNqY4bKbS7g` | `03530992c2f712825050f987aa98b2b7cacd4fbd007aef453675afcc1d750c456a` | `KxvLzbDGH6xL92nHVn4kBAHMaEdRJneqhfiF7btgKT5oa6D1KwWx`
+   
+## Groestlcoin Testnet
+
+`m/44'/1'/0'/0/i`
+
+index | address                              | public key                                                           | private key
+------|--------------------------------------|----------------------------------------------------------------------|------------
+   0  | `mvbu1Gdy8SUjTenqerxUaZyYjmvedc787y` | `030e669acac1f280d1ddf441cd2ba5e97417bf2689e4bbec86df4f831bf9f7ffd0` | `cPigoY3hubxpXad1t5WmxpcQpmezLeCcbpA7EpyhDofFnedLHBaT`
+   1  | `mopZWqZZyQc3F2Sy33cvDtJchSAMw6psrt` | `0294e3e5e77e22eea0e4c0d30d89beb4db7f69b4bf1ae709e411d6a06618b8f852` | `cVN8eHRQh8r9THM2Mu5HCSjx6cfVdssqGL1KeiCKBwUouyeX5wXZ`
+   2  | `mgswWyysmViMqYmn5XEj1pVz7rVUhwLwmT` | `03f5008445568548bd745a3dedccc6048969436bf1a49411f60938ff1938941f14` | `cUCiXe6qNE43rEJkSR9e1Tt37W5gQmmGeBiSmXzDbZgxbs6qx83w`
+   3  | `momtnzR3XqXgDSsFmd8gkGxUiHZLdGuwNb` | `029ad0b9519779c540b34fa8d11d24d14a5475546bfa28c7de50573d22a503ce21` | `cTAi8RAF2htyUn3F921npbuJLSVdYfpfwqjwLEAPkqvFxL9w2gMf`
+   4  | `moE1dVYvebvtaMuNdXQKvu4UxUftHrxubx` | `0313a443e806f25052ac7363adc689fcfa72893f2a51a35ab5e096ed5e6cd8517e` | `cUmGFJMq5Vkh4rjKHe4J4S5adJH1E8xFJJ2ZARBSZNBVzYwFUfyE`
+   5  | `muXZYKRJFJ2qPegzV2GEzLqHxngJpGE1rY` | `02e35cca50cb2626212bce8fdfb988bb33f303b15536e9f84f018e63045dbb84ac` | `cRHMG1RjgVWTdUNEgDD5oNEvQvBAha5N3YntnT7rC8yekeHrXcuQ`
+   6  | `mnY26FLTzfC94mDoUcyDJh1GVE3Lt4iVCd` | `0344e14b3da8f5fe77a5465d0f8fe089d64ed5517d1f1f989edd00f530938a2c22` | `cS9rFFu8douRgweuQKLdF4QXpS3H1UeoNxZWTt6K874nt4vDYQJp`
+   7  | `mgV9Z3YuSbxGb2b2Y1T6VCqtU2osx6mqvs` | `035169c4d6a36b6c4f3e210f46d329efa1cb7a67ffce7d62062d4a8a17c23756e1` | `cQ1Uh9vXLhaoEgPGUEGMoWACpzrVesmB8G4KdK5vZBnLBifd1t1d`
+   8  | `miLqfMwzis98J5vkjjhTiXVsrkAYyMik61` | `03260dc4925b14addb52b4e62c698b99d2318f3d909477a081ae8e5d94dc3c66d8` | `cPwi3WVwjgr422fBeLa22UHwRkQEMZqoJBjevuosqd25yyZB6Yk5`
+   9  | `mhAacBq3SnXEpoxzEwKqfnQz1iYjxvqrcP` | `02b3397d76b093624981b3c3a279c79496d16820f821528b9e403bdfc162b34c3c` | `cRkkmKXgTmq3Je2B71Rn4HQxeo2hEqvtUeQ5r4Q7eKr5qtnuEeMs`
+   
 ## Litecoin
 
 `m/44'/2'/0'/0/i`
