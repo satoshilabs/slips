@@ -28,6 +28,8 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0021](slip-0021.md) | Hierarchical derivation of symmetric keys                             | Standard      | Final    |
 | [SLIP-0022](slip-0022.md) | FIDO2 Credential ID format for HD wallets                             | Standard      | Final    |
 | [SLIP-0023](slip-0023.md) | Cardano HD master node derivation from a master seed                  | Standard      | Final    |
+| [SLIP-0024](slip-0024.md) | Trezor payment request format                                         | Standard      | Draft    |
+| [SLIP-0025](slip-0025.md) | Key derivation for CoinJoin accounts                                  | Standard      | Draft    |
 | [SLIP-0032](slip-0032.md) | Extended serialization format for BIP-32 wallets                      | Standard      | Draft    |
 | [SLIP-0039](slip-0039.md) | Shamir's Secret-Sharing for Mnemonic Codes                            | Standard      | Final    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Active   |
