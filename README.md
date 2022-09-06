@@ -37,6 +37,7 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0077](slip-0077.md) | Deterministic blinding key derivation for Confidential Transactions   | Standard      | Draft    |
 | [SLIP-0132](slip-0132.md) | Registered HD version bytes for BIP-0032                              | Standard      | Active   |
 | [SLIP-0173](slip-0173.md) | Registered human-readable parts for BIP-0173                          | Standard      | Active   |
+| [SLIP-0173](slip-0174.md) | Deterministic key hierarchy for BLS-12381 curve                       | Standard      | Draft    |
 
 ---
 
