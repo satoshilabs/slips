@@ -1023,7 +1023,7 @@ Coin type | Path component (`coin_type'`) | Symbol | Coin
 992   | 0x800003e0 | UNT    | [Unit](https://github.com/RebornMetaverse/Unit-reborn)
 993   | 0x800003e1 | XRB    | [X Currency](https://x-currency.org)
 994   | 0x800003e2 | QUAI   | [Quai Network](https://quai.network/)
-995   | 0x800003e3 |        |
+995   | 0x800003e3 | CAPS   | [Ternoa](https://www.ternoa.network/)
 996   | 0x800003e4 | OKT    | [OKChain Token](https://www.okex.com/okchain)
 997   | 0x800003e5 | SUM    | [Solidum](https://solidum.network)
 998   | 0x800003e6 | LBTC   | [Lightning Bitcoin](http://lbtc.io)
