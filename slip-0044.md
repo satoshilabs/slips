@@ -1009,7 +1009,7 @@ All these constants are used as hardened derivation.
 | 978        | 0x800003d2                    |         |
 | 979        | 0x800003d3                    |         |
 | 980        | 0x800003d4                    |         |
-| 981        | 0x800003d5                    |         |
+| 981        | 0x800003d5                    | TAFECO  | Taf ECO Chain					   |
 | 982        | 0x800003d6                    |         |
 | 983        | 0x800003d7                    |         |
 | 984        | 0x800003d8                    |         |
