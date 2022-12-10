@@ -675,7 +675,7 @@ All these constants are used as hardened derivation.
 | 644        | 0x80000284                    | TREE    | Tree                              |
 | 645        | 0x80000285                    | LX      | Lynx                              |
 | 646        | 0x80000286                    | XLN     | Lunarium                          |
-| 647        | 0x80000287                    |         |
+| 647        | 0x80000287                    | CIC     | CIC Chain                         |
 | 648        | 0x80000288                    | ZRB     | Zarb                              |
 | 649        | 0x80000289                    |         |
 | 650        | 0x8000028a                    | UCO     | Archethic                         |
