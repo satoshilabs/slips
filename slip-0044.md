@@ -713,7 +713,7 @@ All these constants are used as hardened derivation.
 | 682        | 0x800002aa                    | CHTA    | Cheetahcoin                       |
 | 683        | 0x800002ab                    |         |
 | 684        | 0x800002ac                    |         |
-| 685        | 0x800002ad                    |         |
+| 685        | 0x800002ad                    | OAS     | Oasys                             |
 | 686        | 0x800002ae                    | KAR     | Karura Network                    |
 | 687        | 0x800002af                    |         |
 | 688        | 0x800002b0                    | CET     | CoinEx Chain                      |
