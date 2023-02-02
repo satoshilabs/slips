@@ -69,7 +69,7 @@ index | address                              | public key                       
    7  | `Fe9N7LyoTE58PmQ9N2nSAEeeDEbBhS1NLt` | `0344853499594b040ca8c4f605b5f5005d0c4fdf475cd75f158444c6d86b11f3ca` | `Kx4cu3FjSujkjTQVz8LDArXkpScgyMbtJDHEWWaHsrmnTXmtW9M5`
    8  | `FhuvBfBm8gBfhqM93NzPaVXef9Fv95j2rG` | `03331f59b83c3e2274d4b25ca7643f55822e217339132f26e6ce2db82b6e1f8062` | `L3UA7k9U8x5PTc7XQoDtzM5qisNF7XrEkhufF6X73D4iahSMn7t2`
    9  | `Fn5sfR7FifuLYuBjnAtwreGxNqY4bKbS7g` | `03530992c2f712825050f987aa98b2b7cacd4fbd007aef453675afcc1d750c456a` | `KxvLzbDGH6xL92nHVn4kBAHMaEdRJneqhfiF7btgKT5oa6D1KwWx`
-   
+
 ## Groestlcoin Testnet
 
 `m/44'/1'/0'/0/i`
@@ -86,7 +86,7 @@ index | address                              | public key                       
    7  | `mgV9Z3YuSbxGb2b2Y1T6VCqtU2osx6mqvs` | `035169c4d6a36b6c4f3e210f46d329efa1cb7a67ffce7d62062d4a8a17c23756e1` | `cQ1Uh9vXLhaoEgPGUEGMoWACpzrVesmB8G4KdK5vZBnLBifd1t1d`
    8  | `miLqfMwzis98J5vkjjhTiXVsrkAYyMik61` | `03260dc4925b14addb52b4e62c698b99d2318f3d909477a081ae8e5d94dc3c66d8` | `cPwi3WVwjgr422fBeLa22UHwRkQEMZqoJBjevuosqd25yyZB6Yk5`
    9  | `mhAacBq3SnXEpoxzEwKqfnQz1iYjxvqrcP` | `02b3397d76b093624981b3c3a279c79496d16820f821528b9e403bdfc162b34c3c` | `cRkkmKXgTmq3Je2B71Rn4HQxeo2hEqvtUeQ5r4Q7eKr5qtnuEeMs`
-   
+
 ## Litecoin
 
 `m/44'/2'/0'/0/i`
