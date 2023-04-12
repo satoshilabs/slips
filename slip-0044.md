@@ -857,7 +857,7 @@ All these constants are used as hardened derivation.
 | 826        | 0x8000033a                    |         |
 | 827        | 0x8000033b                    | ACE     | Endurance                         |
 | 828        | 0x8000033c                    | CCN     | ComputeCoin                       |
-| 829        | 0x8000033d                    |         |
+| 829        | 0x8000033d                    | BBA     | BBACHAIN                          |
 | 830        | 0x8000033e                    |         |
 | 831        | 0x8000033f                    | CRUZ    | cruzbit                           |
 | 832        | 0x80000340                    | SAPP    | Sapphire                          |
