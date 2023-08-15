@@ -685,7 +685,7 @@ All these constants are used as hardened derivation.
 | 654        | 0x8000028e                    | USDG    | US Digital Gold                   |
 | 655        | 0x8000028f                    | WMP     | WAMP                              |
 | 656        | 0x80000290                    | EKTA    | Ekta                              |
-| 657        | 0x80000291                    |         |
+| 657        | 0x80000291                    | YDA     | YadaCoin                          |
 | 658        | 0x80000292                    |         |
 | 659        | 0x80000293                    | KOIN    | Koinos                            |
 | 660        | 0x80000294                    | PIRATE  | PirateCash                        |
