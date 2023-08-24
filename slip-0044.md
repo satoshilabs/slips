@@ -1043,7 +1043,7 @@ All these constants are used as hardened derivation.
 | 1013       | 0x800003f5                    | BIC     | Beincrypto                        |
 | 1020       | 0x800003fc                    | EVC     | Evrice                            |
 | 1022       | 0x800003fe                    | XRD     | Radix DLT                         |
-| 1023       | 0x800003ff                    | ONE     | HARMONY-ONE                       |
+| 1023       | 0x800003ff                    | ONE     | HARMONY-ONE (Legacy)              |
 | 1024       | 0x80000400                    | ONT     | Ontology                          |
 | 1025       | 0x80000401                    | CZZ     | Classzz                           |
 | 1026       | 0x80000402                    | KEX     | Kira Exchange Token               |
