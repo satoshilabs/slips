@@ -1100,6 +1100,7 @@ All these constants are used as hardened derivation.
 | 1888       | 0x80000760                    | ZTX     | Zetrix                            |
 | 1899       | 0x8000076b                    | XEC     | eCash token                       |
 | 1901       | 0x8000076d                    | CLC     | Classica                          |
+| 1907       | 0x80000773                    | BITCI   | Bitcicoin                         |
 | 1919       | 0x8000077f                    | VIPS    | VIPSTARCOIN                       |
 | 1926       | 0x80000786                    | CITY    | City Coin                         |
 | 1955       | 0x800007a3                    | XX      | xx coin                           |
