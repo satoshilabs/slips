@@ -1154,6 +1154,7 @@ All these constants are used as hardened derivation.
 | 2718       | 0x80000a9e                    | NAS     | Nebulas                           |
 | 2894       | 0x80000b4e                    | REOSC   | REOSC Ecosystem                   |
 | 2941       | 0x80000b7d                    | BND     | Blocknode                         |
+| 3000       | 0x80000bb8                    | SM      | Stealth Message                   |
 | 3003       | 0x80000bbb                    | LUX     | LUX                               |
 | 3030       | 0x80000bd6                    | HBAR    | Hedera HBAR                       |
 | 3077       | 0x80000c05                    | COS     | Contentos                         |
