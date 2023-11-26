@@ -749,7 +749,7 @@ All these constants are used as hardened derivation.
 | 718        | 0x800002ce                    | PEER    | Peer                              |
 | 719        | 0x800002cf                    | ZET     | Zetacoin                          |
 | 720        | 0x800002d0                    | ABY     | Artbyte                           |
-| 721        | 0x800002d1                    |         |
+| 721        | 0x800002d1                    | PGX     | Mirai Chain                       |
 | 722        | 0x800002d2                    | IL8P    | InfiniLooP                        |
 | 723        | 0x800002d3                    |         |
 | 724        | 0x800002d4                    | XVC     | Vanillacash                       |
