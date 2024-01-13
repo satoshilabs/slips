@@ -1178,6 +1178,7 @@ All these constants are used as hardened derivation.
 | 4444       | 0x8000115c                    | C4E     | Chain4Energy                      |
 | 4919       | 0x80001337                    | XVM     | Venidium                          |
 | 4999       | 0x80001387                    | BXN     | BlackFort Exchange Network        |
+| 5000       | 0x80001388                    | V12     | Vet The Vote                      |
 | 5006       | 0x8000138e                    | SBC     | Senior Blockchain                 |
 | 5248       | 0x80001480                    | FIC     | FIC                               |
 | 5353       | 0x800014e9                    | HNS     | Handshake                         |
