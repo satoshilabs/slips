@@ -1,7 +1,5 @@
 # SatoshiLabs Improvement Proposals
 
-[![Build Status](https://travis-ci.org/satoshilabs/slips.svg?branch=master)](https://travis-ci.org/satoshilabs/slips)
-
 SatoshiLabs projects need a way how to document their technical decisions and features.
 For some of them Bitcoin Improvement Proposal (BIP) is not a right place because
 their range and implications are outside of the scope of Bitcoin and cryptocurrencies.
@@ -22,12 +20,15 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | [SLIP-0015](slip-0015.md) | Format for Bitcoin metadata and its encryption in HD wallets          | Standard      | Final    |
 | [SLIP-0016](slip-0016.md) | Format for password storage and its encryption                        | Standard      | Final    |
 | [SLIP-0017](slip-0017.md) | Elliptic Curve Diffie-Hellman using deterministic hierarchy           | Standard      | Final    |
-| [SLIP-0018](slip-0018.md) | reserved (CoSi)                                                       | Standard      | Draft    |
+| SLIP-0018                 | reserved (CoSi)                                                       | Standard      | Draft    |
 | [SLIP-0019](slip-0019.md) | Proof of Ownership                                                    | Standard      | Accepted |
 | [SLIP-0020](slip-0020.md) | Proof of User Confirmation                                            | Standard      | Draft    |
 | [SLIP-0021](slip-0021.md) | Hierarchical derivation of symmetric keys                             | Standard      | Final    |
 | [SLIP-0022](slip-0022.md) | FIDO2 Credential ID format for HD wallets                             | Standard      | Final    |
 | [SLIP-0023](slip-0023.md) | Cardano HD master node derivation from a master seed                  | Standard      | Final    |
+| [SLIP-0024](slip-0024.md) | Trezor payment request format                                         | Standard      | Draft    |
+| [SLIP-0025](slip-0025.md) | Key derivation for CoinJoin accounts                                  | Standard      | Draft    |
+| SLIP-0026                 | reserved (CoSi)                                                       | Standard      | Draft    |
 | [SLIP-0032](slip-0032.md) | Extended serialization format for BIP-32 wallets                      | Standard      | Draft    |
 | [SLIP-0039](slip-0039.md) | Shamir's Secret-Sharing for Mnemonic Codes                            | Standard      | Final    |
 | [SLIP-0044](slip-0044.md) | Registered coin types for BIP-0044                                    | Standard      | Active   |
