@@ -1127,6 +1127,7 @@ All these constants are used as hardened derivation.
 | 2000       | 0x800007d0                    | GIN     | GinCoin                           |
 | 2001       | 0x800007d1                    | MNP     | MNPCoin                           |
 | 2002       | 0x800007d2                    | MLN     | Miraland                          |
+| 2015       | 0x800007df                    | TEER    | Integritee                        |
 | 2017       | 0x800007e1                    | KIN     | Kin                               |
 | 2018       | 0x800007e2                    | EOSC    | EOSClassic                        |
 | 2019       | 0x800007e3                    | GBT     | GoldBean Token                    |
