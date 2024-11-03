@@ -53,6 +53,40 @@ index | address                              | public key                       
    8  | `XteBgFFTpGz2NNedqsZEcqPz5m31AQBBYz` | `0260ec3beb9f51b4de98fe7f4c13814077603b6211c9e6acdd1c7b0cc796450d79` | `XK13VgxcbF3h9Hr9g5bn1uuhtuaNsfEbcFzQxUsowVVeV7LKGQRy`
    9  | `XpkAwbPzQFdLmuAeYs7BLJfHfXL163QatG` | `027df3bcb58f397d99ec944ae74b15f15bf6ab24190e11e7d3fc164107eb36258b` | `XEq1Rvq4AQKNm52pqiaeUnyG6DZ9Zf6EvrmaZ23Xx2aVrUPYkq6b`
 
+## Blackcoin
+
+`m/44'/10'/0'/0/i`
+
+index | address                              | public key                                                           | private key
+------|--------------------------------------|----------------------------------------------------------------------|------------
+  0   | `B6u8FSK5XB4eKtehtZktQAxYC6HVfXV439` | `039b60eacb36d58235cf5123e4b40681a225f42443acd337d893fc5c130bf13f28` | `PgeXdSFgMfK3YxXrB3psJmbVB3cvsY6X4JABBDffwhS9okH42Kot`
+  1   | `B4UD67fYm3GDBqZnfhsX8BN3sMRfzX5TV2` | `0285a72741b461e69d8cdc5da76120c6248c32d0a80f97efc3f0ec817f88189edd` | `PiuXK5cxZyp9MRMcRmukLb2WFaEoT3oKXr91iMUpVSDpqrbEKgKB`
+  2   | `BBJn1RraLHwckyNqAgk5vtYjoMMuhU3HYY` | `0275408d9e85178acae9e6ae9943aee56702fff74e3e78bd2a181508e815f234f1` | `Pe8mN9H9BmkBbP8xgnVzJdxZqtArNnySby9XcFyNgwHfYeSnddnS`
+  3   | `BHBwZuXWuU17hLfmTdbX6Q6VW7rSJcDiNT` | `027e6a63f3bfe7746d54c57a1911f091e2d12908dbd47095c48695e26fd6cda661` | `PmKdYTEVNfzvgBR5JYbJTJnzYgJ749ktmvdyuefrSSf9PzAvXjJf`
+  4   | `BCtMQ4oX88WpeAWu349vkvTaj9iEXtpzoJ` | `037c611bf1b62015f9e858c93f4f5602c3a4177851d334beaf6ff377393d8c2780` | `PeSzwsKBTqExuifxgRzHABCNw9XDA1Mn1pekvTJWGuhL5gFVwYzn`
+  5   | `BHkRcs4ozyNk7Ugo8Cmfji1xXnjyHGCwPn` | `026cbf96317cc96f1251ea3a46ea6394f6cb513be3f881e950ee1679947831b02d` | `PfQrPro1yJG5AmLPgrcmNeUtH933Repmb6w2GrKzWCSCvcx9WhCx`
+  6   | `BC5BgqQ2xDNAeVNHq1crvXpbHy5fL2ZjGV` | `03e4ca6d587ec16f38e3f06f392e7d3c87eb191707a8bdc5180c5c8e9d67a3500b` | `PgNq1d48KRaHo23K2tP7AxTrBe2taZmoqMNjB9tUz1dZrxfECQ2Z`
+  7   | `B93sZDXdzvTCJi9pUW7qA5FisWKhHFnra4` | `023bc272bb8cf68e7a44b0fb6b4d44316361387a7b35d25a80e9f68d2c064665d9` | `Phxg9Tn4ZGUnJ2B4FgP8juwqKpdE3Y5eR1azbCQt8xrHcWUBo5zG`
+  8   | `BACDcY6ZKYdbZMNMo3aXNb7UbiBPFnGAUN` | `0272bf7e66f67a4f35c5ac8bc552d7e5bf01841f6bb361c4d3986243d4c00a6cb1` | `PewxWkpeHeosXD6v5xkHXGWEhzgc1UbesKFw3kQzS9fKkhneQPJn`
+  9   | `BSxzGzxTxh9RDVvrcpwbtcFnZFbPzrEQT5` | `023a55e6acd59483b9e65261c3fb901d66208fb562f7422028d094872559310743` | `PmSmDq1Kacb4soufN31cetygZZCHTKSQvJVW5CJPPTuyXFKGv4R6`
+
+## Blackcoin Testnet
+
+`m/44'/1'/0'/0/i`
+
+index | address                              | public key                                                           | private key
+------|--------------------------------------|----------------------------------------------------------------------|------------
+  0   | `moVfsvhNAb31keftGwadAZMz46QQXp4CeS` | `03b61cdf0ca57be13b65f4b6189806206d33853c842ea1d4a27bd22cb9fcc849bc` | `cMsk2LJhDRBitBpznKSXGqjpAA9ftYyDYRAdXbPSkR7HffticKkV`
+  1   | `mxKACEXaxGM7NAH6qZwoWL4q9aVX9WVLYq` | `024d5d647815e0fdfb561af5ee491bdaa73f31151df22b9b6c0ec18fc8b4227332` | `cW6ofHTUSDffA5dTbfpsSdDynmEos72wv6AChMbRXqPYMHharoVu`
+  2   | `mreviVh8ZVMxeiZuvYRz78JAkydhMaQM3j` | `03b08ed49f90f516e6b1b879f2f120ebebb09e19e727b8b013ad887b725fbc0d1d` | `cSVZH7uovvjYnvmgRpKtvLwS7Gd9DwNREZWAnBnH5FbTUdRpF34j`
+  3   | `moj2n8hVXUZTsjJQwXJ9aDdFgjfshsy6BF` | `0334c579f5ef2fcc0a29dd32f7aec070547310a59c54f5900bf91d447352759f8e` | `cSq21Rqv4kaAXoVg6DM9SBfpgb8DHLNUF5JGFtTxqV43HSeDhrWo`
+  4   | `mnkD2oKHLwanfj6fpvYnaD5JJboFpbR1T1` | `03a9184c1c659f94125f907ec0ed26e85db97033cb5219b945076d173040a8612c` | `cNef9mGfRwNRUrfcCT5KVemfir9LEh3YPQfUyvSfxpmFkMvWbE97`
+  5   | `mnAC5mvhZSxtBUEMXJ5RyHZAxj4EiiQk33` | `0301169c8d0441baa8b3c7a73231a526157e892624c7b2bb8511fb28ccad226c86` | `cVs7HFMiMHwTsAUWT2fwzkoVs9uWFTPw9LGuLgsawLB1qbMU3PEB`
+  6   | `mt7PJiKZZSg8dMXq6WekqshnfDH8ho4f9s` | `0340fec6a1c667ec7ae5f4fc6f712482be1760efef0845b47973bff301b83b4136` | `cPe95gV46uHDKX3AVCNzr6PoAtXv9iVdpxfbeCsanN3Rn1ebJnwH`
+  7   | `mrUBLa65ug876kZY5xgcutkaayGS7CMdhM` | `02a3c8fbb4720e921d2cad33fd2d638d49e8b919af9de2c86896d7a764414f292b` | `cVoovhRgVgMWWpkfPXMnwSmKyddX6sHJtnnmfXcJVA9qNFyYRmES`
+  8   | `mhBrMC9jSMWytESbe87zDb1XzXvEdmaJD6` | `0384d8a85e33666f14caab818a91b1038153a4120a0fd488504a04b0321de0bfb4` | `cPUBkMFZhrJnxepHKpdEznQbTU3RKX4Z2e2dt4zLENorfkgEjaE7`
+  9   | `mtRhTJLDeQCq2ALf9QsfPBiiWouryojqqB` | `0302074a14652be01a237131c47743336309614a87a4acbb9bd9a931a0ad195140` | `cRfXxFsds34EWqSUD2gptXNPC69i7NojLkXg1AJjsXhGP7a1y6Un`
+
 ## Groestlcoin
 
 `m/44'/17'/0'/0/i`
