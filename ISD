@@ -1,5 +1,5 @@
 {
-  "name": "ISD",
+   "name": "ISD",
   "symbol": "ISD",
   "chainId": 7832,
   "rpc": ["https://rpc.isd-network.com"],
