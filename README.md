@@ -1,7 +1,7 @@
 # SatoshiLabs Improvement Proposals
 
-SatoshiLabs projects need a way how to document their technical decisions and features.
-For some of them Bitcoin Improvement Proposal (BIP) is not a right place because
+SatoshiLabs projects need a way to document their technical decisions and features.
+For some of them Bitcoin Improvement Proposal (BIP) is not the right place because
 their range and implications are outside of the scope of Bitcoin and cryptocurrencies.
 
 SLIP repository is an extension to Bitcoin Improvement Proposal (BIP) process
