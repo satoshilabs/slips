@@ -6,15 +6,13 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.asymmetric import ec
-from base58 import b58encode_check
 
 SECP256K1_ORDER = int("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141", 16)
 SECP256R1_ORDER = int("FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551", 16)
 privdev = 0x80000000
 
-# mode 0 - compatible with BIP32 private derivation
+# SLIP-0010: master node from seed (secp256k1, nist256p1, ed25519, curve25519)
 def seed2hdnode(seed, curve, modifier, curve_order):
-    k = seed
     while True:
         h = hmac.new(modifier, seed, hashlib.sha512).digest()
         key, chaincode = h[:32], h[32:]
@@ -24,24 +22,11 @@ def seed2hdnode(seed, curve, modifier, curve_order):
         if (a < curve_order and a != 0):
             break
         seed = h
-        #print('RETRY seed: ' + seed.hex())
     return (key, chaincode)
 
 def fingerprint(publickey):
     h = hashlib.new('ripemd160', hashlib.sha256(publickey).digest()).digest()
     return h[:4]
-
-def b58xprv(parent_fingerprint, private_key, chain, depth, childnr):
-    raw = (b'\x04\x88\xad\xe4' +
-              bytes([depth]) + parent_fingerprint + childnr.to_bytes(4, 'big') +
-              chain + b'\x00' + private_key)
-    return b58encode_check(raw).decode()
-
-def b58xpub(parent_fingerprint, public_key, chain, depth, childnr):
-    raw = (b'\x04\x88\xb2\x1e' +
-              bytes([depth]) + parent_fingerprint + childnr.to_bytes(4, 'big') +
-              chain + public_key)
-    return b58encode_check(raw).decode()
 
 def publickey(private_key, curve):
     if curve == 'ed25519':
@@ -75,15 +60,12 @@ def derive(parent_key, parent_chaincode, i, curve, curve_order):
         key, chaincode = h[:32], h[32:]
         if curve in ('ed25519', 'curve25519'):
             break
-        #print('I: ' + h.hex())
         a = int.from_bytes(key, 'big')
         key = (a + int.from_bytes(parent_key, 'big')) % curve_order
         if (a < curve_order and key != 0):
             key = key.to_bytes(32, 'big')
             break
         d = b'\x01' + h[32:] + i.to_bytes(4, 'big')
-        #print('a failed: ' + h[:32].hex())
-        #print('RETRY: ' + d.hex())
                         
     return (key, chaincode)
 
@@ -114,13 +96,11 @@ def show_testvector(name, curvename, seedhex, derivationpath):
     print('  * chain code: ' + c.hex())
     print('  * private: ' + k.hex())
     print('  * public: ' + p.hex())
-    depth = 0
     for i in derivationpath:
         if curve in ('ed25519', 'curve25519'):
             # no public derivation for ed25519 and curve25519
             i = i | privdev
         fpr = fingerprint(p)
-        depth = depth + 1
         path = path + "/" + str(i & (privdev-1))
         if ((i & privdev) != 0):
             path = path + "<sub>H</sub>"
@@ -131,8 +111,6 @@ def show_testvector(name, curvename, seedhex, derivationpath):
         print('  * chain code: ' + c.hex())
         print('  * private: ' + k.hex())
         print('  * public: ' + p.hex())
-        #print(b58xprv(fpr, k, c, depth, i))
-        #print(b58xpub(fpr, p, c, depth, i))
     print()
 
 def show_testvectors(name, curvenames, seedhex, derivationpath):
