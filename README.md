@@ -23,7 +23,7 @@ Each SLIP should provide a concise technical specification of the feature and a 
 | SLIP-0018                 | reserved (CoSi)                                                       | Standard      | Draft    |
 | [SLIP-0019](slip-0019.md) | Proof of Ownership                                                    | Standard      | Accepted |
 | [SLIP-0020](slip-0020.md) | Proof of User Confirmation                                            | Standard      | Draft    |
-| [SLIP-0021](slip-0021.md) | Hierarchical derivation of symmetric keys                             | Standard      | Final    |
+| [SLIP-0021](slip-0021.md) | Hierarchical derivation of secret keys                                | Standard      | Final    |
 | [SLIP-0022](slip-0022.md) | FIDO2 Credential ID format for HD wallets                             | Standard      | Final    |
 | [SLIP-0023](slip-0023.md) | Cardano HD master node derivation from a master seed                  | Standard      | Final    |
 | [SLIP-0024](slip-0024.md) | Trezor payment request format                                         | Standard      | Draft    |
