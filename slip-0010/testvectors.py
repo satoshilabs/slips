@@ -2,15 +2,40 @@
 
 import hashlib
 import hmac
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-from cryptography.hazmat.primitives.asymmetric import ec
+import json
+
 from base58 import b58encode_check
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+import bedrock_python as bedrock
 
 SECP256K1_ORDER = int("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141", 16)
 SECP256R1_ORDER = int("FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551", 16)
 privdev = 0x80000000
+
+# Helper functions for ML-DSA schemes
+def mldsa_to_raw_bytes(key):
+    """Extract raw bytes from ML-DSA key (verification key or signing key).
+    
+    bedrock-python serializes keys as JSON: {"scheme": 1, "value": "hex_string"}
+    This function extracts the raw bytes from the 'value' field.
+    """
+    key_json = json.loads(key.to_string())
+    return bytes.fromhex(key_json['value'])
+
+def get_mldsa_scheme(curve):
+    """Get the ML-DSA scheme for the given curve name."""
+    schemes = {
+        'ml-dsa-44': bedrock.MlDsaScheme.dsa_44,
+        'ml-dsa-65': bedrock.MlDsaScheme.dsa_65,
+        'ml-dsa-87': bedrock.MlDsaScheme.dsa_87,
+    }
+    return schemes.get(curve, lambda: None)()
+
+def is_mldsa(curve):
+    return curve in ('ml-dsa-44', 'ml-dsa-65', 'ml-dsa-87')
 
 # mode 0 - compatible with BIP32 private derivation
 def seed2hdnode(seed, curve, modifier, curve_order):
@@ -19,7 +44,7 @@ def seed2hdnode(seed, curve, modifier, curve_order):
         h = hmac.new(modifier, seed, hashlib.sha512).digest()
         key, chaincode = h[:32], h[32:]
         a = int.from_bytes(key, 'big')
-        if (curve in ('ed25519', 'curve25519')):
+        if (curve in ('ed25519', 'curve25519', 'ml-dsa-44', 'ml-dsa-65', 'ml-dsa-87')):
             break
         if (a < curve_order and a != 0):
             break
@@ -73,7 +98,7 @@ def derive(parent_key, parent_chaincode, i, curve, curve_order):
     while True:
         h = hmac.new(k, d, hashlib.sha512).digest()
         key, chaincode = h[:32], h[32:]
-        if curve in ('ed25519', 'curve25519'):
+        if curve in ('ed25519', 'curve25519', 'ml-dsa-44', 'ml-dsa-65', 'ml-dsa-87'):
             break
         #print('I: ' + h.hex())
         a = int.from_bytes(key, 'big')
@@ -96,13 +121,35 @@ def get_curve_info(curvename):
         return ('ed25519', b'ed25519 seed', None)
     if curvename == 'curve25519':
         return ('curve25519', b'curve25519 seed', None)
+    if curvename == 'ml-dsa-44':
+        return ('ml-dsa-44', b'ML-DSA-44 seed', None)
+    if curvename == 'ml-dsa-65':
+        return ('ml-dsa-65', b'ML-DSA-65 seed', None)
+    if curvename == 'ml-dsa-87':
+        return ('ml-dsa-87', b'ML-DSA-87 seed', None)
     raise BaseException('unsupported curve: '+curvename)
+
+def get_keypair(k, curve):
+    """
+    Get private and public keys for the given seed and curve.
+    For ML-DSA: generates keypair from seed, returns (sk_bytes, pk_bytes)
+    For others: returns (k, publickey(k, curve))
+    """
+    if is_mldsa(curve):
+        scheme = get_mldsa_scheme(curve)
+        keypair = scheme.keypair_from_seed(k)
+        sk = mldsa_to_raw_bytes(keypair.secret_key())
+        pk = b'\x00' + mldsa_to_raw_bytes(keypair.public_key())
+        return sk, pk
+    else:
+        pk = publickey(k, curve)
+        return k, pk
 
 def show_testvector(name, curvename, seedhex, derivationpath):
     curve, seedmodifier, curve_order = get_curve_info(curvename)
     master_seed = bytes.fromhex(seedhex)
     k,c = seed2hdnode(master_seed, curve, seedmodifier, curve_order)
-    p = publickey(k, curve)
+    sk, pk = get_keypair(k, curve)
     fpr = b'\x00\x00\x00\x00'
     path = 'm'
     print("### "+name+" for "+curvename)
@@ -112,25 +159,25 @@ def show_testvector(name, curvename, seedhex, derivationpath):
     print('* Chain ' + path)
     print('  * fingerprint: ' + fpr.hex())
     print('  * chain code: ' + c.hex())
-    print('  * private: ' + k.hex())
-    print('  * public: ' + p.hex())
+    print('  * private: ' + sk.hex())
+    print('  * public: ' + pk.hex())
     depth = 0
     for i in derivationpath:
-        if curve in ('ed25519', 'curve25519'):
-            # no public derivation for ed25519 and curve25519
+        if curve in ('ed25519', 'curve25519', 'ml-dsa-44', 'ml-dsa-65', 'ml-dsa-87'):
+            # no public derivation for ed25519, curve25519, ml-dsa-44, ml-dsa-65, ml-dsa-87
             i = i | privdev
-        fpr = fingerprint(p)
+        fpr = fingerprint(pk)
         depth = depth + 1
         path = path + "/" + str(i & (privdev-1))
         if ((i & privdev) != 0):
             path = path + "<sub>H</sub>"
-        k,c = derive(k, c, i, curve, curve_order)
-        p = publickey(k, curve) 
+        k, c = derive(k, c, i, curve, curve_order)
+        sk, pk = get_keypair(k, curve)
         print('* Chain ' + path)
         print('  * fingerprint: ' + fpr.hex())
         print('  * chain code: ' + c.hex())
-        print('  * private: ' + k.hex())
-        print('  * public: ' + p.hex())
+        print('  * private: ' + sk.hex())
+        print('  * public: ' + pk.hex())
         #print(b58xprv(fpr, k, c, depth, i))
         #print(b58xpub(fpr, p, c, depth, i))
     print()
@@ -140,7 +187,7 @@ def show_testvectors(name, curvenames, seedhex, derivationpath):
         show_testvector(name, curvename, seedhex, derivationpath)
 
 
-curvenames = ['secp256k1', 'nist256p1', 'ed25519', 'curve25519'];
+curvenames = ['secp256k1', 'nist256p1', 'ed25519', 'curve25519', 'ml-dsa-44', 'ml-dsa-65', 'ml-dsa-87'];
         
 show_testvectors("Test vector 1", curvenames,
                  '000102030405060708090a0b0c0d0e0f',
