@@ -1,0 +1,13 @@
+name: Check SLIP 44
+on:
+  pull_request:
+    paths: ['slip-0044.md']
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: git show "origin/${{ github.base_ref }}:slip-0044.md" > /tmp/base.md
+      - run: python3 scripts/check_slip44.py /tmp/base.md slip-0044.md
