@@ -1,8 +1,8 @@
 # Checks a pull request. The "rules" job checks the commit messages and the
-# SLIP-0044 registry, and fails on any finding, so that the PR page shows at a
-# glance whether the change needs a closer look. Its last step lists all findings,
-# so they are shown when the job's "Details" link is opened. The "errors" job
-# fails only if a rule stated with MUST is violated. A legitimate deviation from a
+# registries, and fails on any finding, so that the PR page shows at a glance
+# whether the change needs a closer look. Its last step lists all findings, so
+# they are shown when the job's "Details" link is opened. The "errors" job fails
+# only if a rule stated with MUST is violated. A legitimate deviation from a
 # SHOULD rule must not block merging, so only "errors" should be required.
 name: Checks
 on:
@@ -17,7 +17,7 @@ jobs:
     outputs:
       # A check step fails if its script reports an error or crashes, and it is
       # skipped if the checkout failed. Warnings alone do not fail a check step.
-      failed: ${{ steps.commits.outcome != 'success' || steps.slip44.outcome != 'success' }}
+      failed: ${{ steps.commits.outcome != 'success' || steps.slip44.outcome != 'success' || steps.slip173.outcome != 'success' }}
     steps:
       # On a pull request, the checkout is a temporary merge commit of the pull request
       # into the base branch. Its first parent, HEAD^1, is the base branch and its second
@@ -40,6 +40,12 @@ jobs:
         run: |
           git show HEAD^1:slip-0044.md > /tmp/base.md
           python3 scripts/check_slip44.py /tmp/base.md slip-0044.md
+      - name: SLIP-0173 registry
+        id: slip173
+        if: ${{ !cancelled() }}
+        run: |
+          git show HEAD^1:slip-0173.md > /tmp/base.md
+          python3 scripts/check_slip173.py /tmp/base.md slip-0173.md
 
       # List the findings of all checks in one place, and fail on warnings too.
       - name: All findings
