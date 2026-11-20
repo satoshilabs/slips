@@ -1,0 +1,57 @@
+# Checks a pull request. The "rules" job checks the SLIP-0044 registry, and fails
+# on any finding, so that the PR page shows at a glance whether the change needs a
+# closer look. Its last step lists all findings, so they are shown when the job's
+# "Details" link is opened. The "errors" job fails only if a rule stated with MUST
+# is violated. A legitimate deviation from a SHOULD rule must not block merging,
+# so only "errors" should be required.
+name: Checks
+on:
+  pull_request:
+permissions:
+  contents: read
+env:
+  FINDINGS_FILE: /tmp/findings.txt
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    outputs:
+      # A check step fails if its script reports an error or crashes, and it is
+      # skipped if the checkout failed. Warnings alone do not fail a check step.
+      failed: ${{ steps.slip44.outcome != 'success' }}
+    steps:
+      # On a pull request, the checkout is a temporary merge commit of the pull request
+      # into the base branch. Its first parent, HEAD^1, is the base branch, so comparing
+      # a file in HEAD^1 with the checked-out file shows what merging would change.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      # Each check runs even if an earlier one failed, so that all findings are reported.
+      - name: SLIP-0044 registry
+        id: slip44
+        if: ${{ !cancelled() }}
+        run: |
+          git show HEAD^1:slip-0044.md > /tmp/base.md
+          python3 scripts/check_slip44.py /tmp/base.md slip-0044.md
+
+      # List the findings of all checks in one place, and fail on warnings too.
+      - name: All findings
+        if: ${{ !cancelled() }}
+        run: |
+          if [ ! -s "$FINDINGS_FILE" ]; then echo "No findings."; exit 0; fi
+          cat "$FINDINGS_FILE"
+          exit 1
+
+  errors:
+    needs: rules
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          RESULT: ${{ needs.rules.result }}
+          FAILED: ${{ needs.rules.outputs.failed }}
+        run: |
+          # The rules job may have been skipped or cancelled before reporting.
+          if [ "$RESULT" = "skipped" ] || [ "$RESULT" = "cancelled" ]; then echo "The rules job did not run."; exit 1; fi
+          if [ "$FAILED" = "true" ]; then echo "Errors were found. See the rules job."; exit 1; fi
+          echo "No errors."

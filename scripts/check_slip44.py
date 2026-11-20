@@ -10,53 +10,28 @@
 
 import re
 import sys
-from collections import Counter
+from common import Findings, changed_rows, check_name, check_unique, find_table, layout_warning, normalize, normalize_name
+
 
 MAX_COIN_TYPE = 0x7FFFFFFF
 
+# Symbols are MIN_SYMBOL_LENGTH to MAX_SYMBOL_LENGTH characters long (error),
+# and NORMAL_SYMBOL_LENGTHS are the normal lengths (anything else is a warning).
+MIN_SYMBOL_LENGTH = 2
+MAX_SYMBOL_LENGTH = 6
+NORMAL_SYMBOL_LENGTHS = (3, 4)
+
 # Values that mean "no symbol" or "no name" and are allowed to repeat.
 SYMBOL_PLACEHOLDERS = {"", "---"}
-NAME_PLACEHOLDERS = {"", "reserved", "deprecated"}
+NAME_PLACEHOLDERS = {"", "*reserved*", "*deprecated*"}
 
 
 def parse(path):
-    """Return the coin type table as a list of (lineno, coin type, symbol, coin) tuples."""
-    rows = []
-    header = None
-    with open(path, encoding="utf-8") as f:
-        for lineno, line in enumerate(f, 1):
-            # Trim only spaces and line endings, so that other whitespace such
-            # as tabs or NBSP stays in the cells and gets reported.
-            line = line.strip(" \r\n")
-            if "|" not in line:
-                # Stop at the first non-table line after the table.
-                if header is not None and rows:
-                    break
-                continue
-
-            # Remove at most one outer pipe on each end, so that "| 748 |||"
-            # keeps its empty cells, then trim the space padding of each cell.
-            line = line.removeprefix("|").removesuffix("|")
-            cells = [c.strip(" ") for c in line.split("|")]
-            if header is None:
-                if cells[0].lower() == "coin type":
-                    header = [c.lower() for c in cells]
-                continue
-
-            # Skip the separator row.
-            if all(re.fullmatch(r":?-+:?", c) for c in cells):
-                continue
-
-            if len(cells) != len(header):
-                sys.exit(f"::error file={path},line={lineno}::Row has {len(cells)} cells, expected {len(header)}.")
-
-            row = dict(zip(header, cells))
-            rows.append((lineno, row["coin type"], row["symbol"], row["coin"]))
-
-    if not rows:
-        sys.exit(f"::error file={path}::Coin type table not found.")
-
-    return rows
+    """Return the coin type table, whose rows have the cells (coin type, symbol, coin name)."""
+    table = find_table(path, "coin type")
+    if not table.rows:
+        sys.exit(f"::error file={path}::Coin type table is empty.")
+    return table
 
 
 def coin_type(s):
@@ -64,115 +39,85 @@ def coin_type(s):
     return int(s) if re.fullmatch(r"[0-9]+", s) else None
 
 
-def normalize(s):
-    """Loose comparison key, e.g. "X Coin", "Xcoin", "X.coin" and "X-coin" all map to "xcoin"."""
-    return re.sub(r"[\W_]+", "", s.casefold())
-
-
-def normalize_name(s):
-    """Like normalize(), but also drops parenthesized parts, e.g. "X Coin (Legacy)" maps to "xcoin"."""
-    return normalize(re.sub(r"\([^)]*\)", "", s))
-
-
-def has_unusual_whitespace(s):
-    """True if s contains whitespace other than single spaces, e.g. tabs, NBSP or double spaces."""
-    return "  " in s or re.search(r"[^\S ]", s) is not None
-
-
 def main(base_path, head_path):
     base = parse(base_path)
     head = parse(head_path)
-    errors = 0
-    warnings = 0
+    findings = Findings("SLIP-0044 check", head_path)
+    report = findings.report
 
-    # Rows present in the base file, used to skip rows that the PR did not touch.
-    unchanged = Counter(r[1:] for r in base)
-
-    # (coin type, value) pairs present in the base file. In a modified row, a
-    # symbol or name that was already there is not checked for collisions, so
-    # that pre-existing duplicates are not blamed on the PR.
-    base_values = {idx: {(r[1], r[idx]) for r in base} for idx in (2, 3)}
-
-    def report(kind, line, msg):
-        nonlocal errors, warnings
-        print(f"::{kind} file={head_path},line={line}::{msg}")
-        if kind == "error":
-            errors += 1
-        else:
-            warnings += 1
-
-    def check_collision(row, idx, label, placeholders, loose_key):
-        """Report an error if another row has the same value ignoring case,
-        or a warning if it matches only after applying loose_key."""
-        value = row[idx]
-        if value in placeholders or (row[1], value) in base_values[idx]:
-            return
-
-        others = [r for r in head if r is not row]
-
-        exact = [r for r in others if r[idx].casefold() == value.casefold()]
-        if exact:
-            clash = ", ".join(f"{r[1]} ({r[idx]})" for r in exact)
-            report("error", row[0], f"{label} '{value}' is already used by coin type {clash}.")
-
-        loose = [r for r in others if r not in exact and loose_key(r[idx]) == loose_key(value)]
-        if loose:
-            clash = ", ".join(f"{r[1]} ({r[idx]})" for r in loose)
-            report("warning", row[0], f"{label} '{value}' is similar to coin type {clash}.")
-
+    # The whole table must be sorted by coin type.
     prev = None
-    for row in head:
-        lineno, ctype, symbol, name = row
-
-        # The whole table must be sorted by coin type.
-        n = coin_type(ctype)
+    for row in head.rows:
+        n = coin_type(row.cells[0])
         if n is None:
-            report("error", lineno, f"Coin type '{ctype}' is not a decimal integer.")
-        else:
-            if prev is not None and n < prev:
-                report("error", lineno, f"Coin type {n} is out of order, it follows {prev}.")
-            prev = n
-
-        # Remaining checks apply only to new or modified rows.
-        if unchanged[row[1:]]:
-            unchanged[row[1:]] -= 1
+            report("error", row.lineno, f"The coin type '{row.cells[0]}' must be a decimal integer.")
             continue
+        if prev is not None and n < prev:
+            report("error", row.lineno, f"The table must be sorted by coin type, but coin type {n} follows coin type {prev}.")
+        prev = n
+
+    # Symbols and coin names of all rows as (line, description, value) entries,
+    # for the uniqueness checks.
+    def entries(rows, idx, placeholders):
+        return [(r.lineno, f"coin type {r.cells[0]} ('{r.cells[idx]}')", r.cells[idx]) for r in rows if r.cells[idx] not in placeholders]
+
+    symbols = entries(head.rows, 1, SYMBOL_PLACEHOLDERS)
+    names = entries(head.rows, 2, NAME_PLACEHOLDERS)
+    base_symbols = [e[2] for e in entries(base.rows, 1, SYMBOL_PLACEHOLDERS)]
+    base_names = [e[2] for e in entries(base.rows, 2, NAME_PLACEHOLDERS)]
+
+    # The remaining checks only apply to new or modified rows.
+    for row in changed_rows(base.rows, head.rows):
+        lineno = row.lineno
+        ctype, symbol, name = row.cells
+
+        # Rows should be laid out like the base file's table.
+        msg = layout_warning(row, base.widths)
+        if msg:
+            report("warning", lineno, msg)
 
         # Coin type must be in range and unique.
+        n = coin_type(ctype)
         if n is not None:
             if re.fullmatch(r"0[0-9]+", ctype):
-                report("error", lineno, f"Coin type '{ctype}' has leading zeros.")
+                report("error", lineno, f"The coin type '{ctype}' must not have leading zeros.")
 
             if n > MAX_COIN_TYPE:
-                report("error", lineno, f"Coin type {n} exceeds {MAX_COIN_TYPE}.")
+                report("error", lineno, f"The coin type {n} must not be greater than {MAX_COIN_TYPE} ({MAX_COIN_TYPE:#x}).")
 
-            if any(r is not row and coin_type(r[1]) == n for r in head):
-                report("error", lineno, f"Coin type {n} is already registered.")
+            if any(r is not row and coin_type(r.cells[0]) == n for r in head.rows):
+                report("error", lineno, f"The coin type {n} is already registered. Please choose a different coin type.")
 
-        # Symbol should be uppercase alphanumeric and must not duplicate an existing one.
-        if symbol not in SYMBOL_PLACEHOLDERS and not re.fullmatch(r"[A-Z0-9]+", symbol):
-            report("warning", lineno, f"Symbol '{symbol}' is not all-caps ASCII.")
+        # Symbol must consist of ASCII letters and digits, should be upper-case and
+        # short, and must not duplicate an existing one.
+        if symbol not in SYMBOL_PLACEHOLDERS:
+            if not re.fullmatch(r"[A-Za-z0-9]+", symbol):
+                report("error", lineno, f"The symbol '{symbol}' must consist of ASCII letters and digits only.")
+            elif symbol != symbol.upper():
+                report("warning", lineno, f"The letters of the symbol '{symbol}' should be upper-case.")
 
-        if has_unusual_whitespace(symbol):
-            report("error", lineno, f"Symbol '{symbol}' contains unusual whitespace.")
+            if len(symbol) < MIN_SYMBOL_LENGTH:
+                report("error", lineno, f"The symbol '{symbol}' must not be shorter than {MIN_SYMBOL_LENGTH} characters.")
+            elif len(symbol) > MAX_SYMBOL_LENGTH:
+                report("error", lineno, f"The symbol '{symbol}' must not be longer than {MAX_SYMBOL_LENGTH} characters.")
+            elif len(symbol) not in NORMAL_SYMBOL_LENGTHS:
+                lengths = " or ".join(map(str, NORMAL_SYMBOL_LENGTHS))
+                report("warning", lineno, f"The symbol '{symbol}' should consist of {lengths} characters.")
 
-        check_collision(row, 2, "Symbol", SYMBOL_PLACEHOLDERS, normalize)
+            entry = next(e for e in symbols if e[0] == lineno)
+            check_unique(report, entry, "symbol", base_symbols, symbols, normalize)
 
         # Coin name is required when a symbol is given, should be ASCII and must
         # not duplicate an existing one. Rows with neither mark unassigned coin types.
         if not name and symbol not in SYMBOL_PLACEHOLDERS:
-            report("error", lineno, f"Symbol '{symbol}' has no coin name.")
+            report("error", lineno, "The coin name must not be empty.")
 
-        if not name.isascii():
-            report("warning", lineno, f"Coin name '{name}' contains non-ASCII characters.")
+        if name not in NAME_PLACEHOLDERS:
+            check_name(report, lineno, "coin name", name)
+            entry = next(e for e in names if e[0] == lineno)
+            check_unique(report, entry, "coin name", base_names, names, normalize_name)
 
-        if has_unusual_whitespace(name):
-            report("error", lineno, f"Coin name '{name}' contains unusual whitespace.")
-
-        check_collision(row, 3, "Coin name", NAME_PLACEHOLDERS, normalize_name)
-
-    print(f"{errors} error(s), {warnings} warning(s).")
-    sys.exit(1 if errors else 0)
+    findings.finish()
 
 
 if __name__ == "__main__":
