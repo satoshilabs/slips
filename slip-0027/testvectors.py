@@ -4,7 +4,7 @@
 The input values need only the Python standard library. The public key hashes
 additionally need:
 
-    pip install dilithium-py kyber-py slh-dsa
+    pip install dilithium-py==1.5.1 kyber-py==1.2.0 slh-dsa==0.2.5
 
 Public key hashes are generated for ML-DSA, ML-KEM and SLH-DSA. They are
 omitted for XMSS, XMSS^MT and LMS.
