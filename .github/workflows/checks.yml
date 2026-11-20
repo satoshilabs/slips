@@ -1,9 +1,10 @@
-# Checks a pull request. The "rules" job checks the commit messages and the
-# registries, and fails on any finding, so that the PR page shows at a glance
-# whether the change needs a closer look. Its last step lists all findings, so
-# they are shown when the job's "Details" link is opened. The "errors" job fails
-# only if a rule stated with MUST is violated. A legitimate deviation from a
-# SHOULD rule must not block merging, so only "errors" should be required.
+# Checks a pull request. The "lint" job runs markdownlint. The "rules" job checks
+# the commit messages and the registries, and fails on any finding, so that the PR
+# page shows at a glance whether the change needs a closer look. Its last step
+# lists all findings, so they are shown when the job's "Details" link is opened.
+# The "errors" job fails only if a rule stated with MUST is violated. A legitimate
+# deviation from a SHOULD rule must not block merging, so only "lint" and "errors"
+# should be required.
 name: Checks
 on:
   pull_request:
@@ -12,6 +13,15 @@ permissions:
 env:
   FINDINGS_FILE: /tmp/findings.txt
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: npx --yes markdownlint-cli@0.50.0 -c markdownlint.json *.md
+
   rules:
     runs-on: ubuntu-latest
     outputs:
