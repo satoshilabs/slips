@@ -4,6 +4,7 @@ import html
 import os
 import re
 import sys
+import unicodedata
 from collections import Counter
 from typing import NamedTuple
 
@@ -142,14 +143,39 @@ def check_unique(report, entry, label, base_values, head_entries, loose_key=None
             return
 
 
+# Characters that look alike in common fonts, mapped to one of them.
+STROKES = str.maketrans({"I": "1", "i": "1", "l": "1", "|": "1", "Ӏ": "1", "і": "1"})
+LOOKALIKES = str.maketrans({
+    # Numbers that look like capital letters.
+    "0": "o", "2": "z", "5": "s", "6": "g", "8": "b",
+    # Cyrillic and Greek letters that look like Latin ones.
+    "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "х": "x", "у": "y",
+    "ο": "o", "ν": "v", "κ": "k", "α": "a", "ρ": "p", "τ": "t",
+})
+
+
 def normalize(s):
-    """Loose comparison key, e.g. "X Coin", "Xcoin", "X.coin" and "X-coin" all map to "xcoin"."""
-    return re.sub(r"[\W_]+", "", s.casefold())
+    """Comparison key that ignores case, accents, punctuation, spaces and characters
+    that look alike, e.g. "B1TC01N" and "BITCOIN" both map to "b1tco1n"."""
+    # Remove accents.
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    # "rn" looks like "m" and "cl" like "d" only in lower case. Vertical strokes are
+    # mapped before case-folding, so that e.g. "L" stays distinct from "I".
+    s = s.replace("rn", "m").replace("cl", "d").translate(STROKES).casefold()
+    # "vv" looks like "w" in both cases.
+    s = s.translate(LOOKALIKES).replace("vv", "w")
+    # Remove everything other than letters and digits, i.e. punctuation and spaces.
+    return re.sub(r"[\W_]+", "", s)
 
 
 def normalize_name(s):
-    """Like normalize(), but also drops parenthesized parts, e.g. "X Coin (Legacy)" maps to "xcoin"."""
-    return normalize(re.sub(r"\([^)]*\)", "", s))
+    """Loose comparison key of a name. A name may be read in any case, so it is
+    compared in lower case, where "L" is a vertical stroke too, e.g. "1itecoin" is
+    similar to "Litecoin" and "B1TC01N" to "Bitcoin". Parenthesized parts are
+    dropped, e.g. "X Coin (Legacy)" is similar to "xcoin"."""
+    s = re.sub(r"\(.*\)", "", s)
+    return normalize(s.lower())
 
 
 def has_unusual_whitespace(s):
