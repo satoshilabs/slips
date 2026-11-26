@@ -1,0 +1,2011 @@
+[
+  {
+    "description": "Example: account-based chain",
+    "path": [
+      "SLIP-9999",
+      "60",
+      "2",
+      "ML-DSA-44"
+    ],
+    "scheme": "ML-DSA-44",
+    "input_values": {
+      "seed": "b5c307ed72d56cb5740d2ed90055080aac5b38de9a266c8bb99606d578583f3f"
+    },
+    "public_key_hash": "338d183228287ed83a0830f321fc6e15e7a7555ececd56878eb01c692bcc3323"
+  },
+  {
+    "description": "Example: UTXO-based chain",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "2",
+      "p2mr",
+      "SLH-DSA-SHAKE-128s",
+      "1",
+      "14"
+    ],
+    "scheme": "SLH-DSA-SHAKE-128s",
+    "input_values": {
+      "SK.seed": "a17cdd18bc16250c2a50d90450229429",
+      "SK.prf": "309bf6db3a8e55ba22948cbf4e78782f",
+      "PK.seed": "edc4acf383e1d15a407a2bf22a75b930"
+    },
+    "public_key_hash": "cefc08b9ea8be09f08fba94452c410863c2753b5b33840f6e0db0d038eade658"
+  },
+  {
+    "description": "Scheme label directly below the application label",
+    "path": [
+      "SLIP-9999",
+      "ML-KEM-768",
+      "0"
+    ],
+    "scheme": "ML-KEM-768",
+    "input_values": {
+      "d": "fbc80cf043dd3fda760b91ae15eabdcfe4aed0391cfa8c35132c32bd9d9e98a0",
+      "z": "83d6e147494c5ec783bd521d68751b43fa805a3cc073cd8b8fe43bdf3e061a85"
+    },
+    "public_key_hash": "3443760cde51cc47932dd2865f077594aa47ef794d1771276de72fed233fe3a9"
+  },
+  {
+    "description": "No key pair labels",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "2",
+      "p2mr",
+      "1",
+      "14",
+      "ML-DSA-65"
+    ],
+    "scheme": "ML-DSA-65",
+    "input_values": {
+      "seed": "9180d82748281a3fefdbf22eafd51d354b09503e28f3174156b418f674075e0b"
+    },
+    "public_key_hash": "842ca8dee7d3dc8af96a55c7950d96734c04f7145ef54794b0bbcae6b056eedf"
+  },
+  {
+    "description": "Integer labels 0 and 2147483648",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-DSA-44",
+      "2147483648"
+    ],
+    "scheme": "ML-DSA-44",
+    "input_values": {
+      "seed": "4604d2825f88ff23137fd6e4c2f11b8fd10785bb990b91bd6172edf14712b774"
+    },
+    "public_key_hash": "9b7612938dccda9289e2829abf3af41bf1e7ef12993bc615cbfb6c2c5d00096e"
+  },
+  {
+    "description": "Context label and key pair label equal to an input label",
+    "path": [
+      "SLIP-9999",
+      "seed",
+      "ML-DSA-44",
+      "seed"
+    ],
+    "scheme": "ML-DSA-44",
+    "input_values": {
+      "seed": "5db65e2936b4f0115c6203cce1a3a471b405155d8db72d3a324a0571eaa84408"
+    },
+    "public_key_hash": "2ad4b5d21858b04c9cae9612e2050056bcf1214236389e32126d2df4c44f746f"
+  },
+  {
+    "description": "ML-DSA-44",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-DSA-44"
+    ],
+    "scheme": "ML-DSA-44",
+    "input_values": {
+      "seed": "981aa26cd2d83f36a29f8615c63bbbd5175dac07d35aa48074078c39775a8870"
+    },
+    "public_key_hash": "213d8ade7467c3d719126f3523d031ce17328e47b15896af09f526db1c3e6997"
+  },
+  {
+    "description": "ML-DSA-65",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-DSA-65"
+    ],
+    "scheme": "ML-DSA-65",
+    "input_values": {
+      "seed": "17c7f701bafe5219ee91c00493f3eaa3925501d9b7ff65c68cd74b982f1ff7a7"
+    },
+    "public_key_hash": "5b49700c66b532d2f6522cc8799721e80f9b66b8082b6211cde9b93b8459f672"
+  },
+  {
+    "description": "ML-DSA-87",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-DSA-87"
+    ],
+    "scheme": "ML-DSA-87",
+    "input_values": {
+      "seed": "606a08c37f611ebb186e50ba530fa9d4896bbe6176f15522d738587f9528b6ff"
+    },
+    "public_key_hash": "0bb2ce8910c80e4bb48f54f19629508db121a930c3150ba53ac071b5f79fdb95"
+  },
+  {
+    "description": "ML-KEM-512",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-KEM-512"
+    ],
+    "scheme": "ML-KEM-512",
+    "input_values": {
+      "d": "69d114ec3e6bb75f1738c4f7f027761289660215bcb1a069566e5f0b4fc7d3a0",
+      "z": "81abb0fabb66b387d5142659124d842f5b1b47cc7fac96df4c368f6d10d2964a"
+    },
+    "public_key_hash": "020c234c2596c53010270065dd070fbab8f189a02d2552ea9efa2e32e4b73863"
+  },
+  {
+    "description": "ML-KEM-768",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-KEM-768"
+    ],
+    "scheme": "ML-KEM-768",
+    "input_values": {
+      "d": "9bf5788638caded447f5a0acd473b2a3fcbea0fb77e9c5a9a2a0a2cfbf996e05",
+      "z": "47e6acc5ca521452ecc1613ee2b6aced4ab919202bd1f7dc21b849f2cfe19c3a"
+    },
+    "public_key_hash": "97a4f2b04ad31e08350a5f4f6118ab71a3b0c58865ed6a6d2cd8eb99b57c2959"
+  },
+  {
+    "description": "ML-KEM-1024",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "ML-KEM-1024"
+    ],
+    "scheme": "ML-KEM-1024",
+    "input_values": {
+      "d": "a24ab6fbe7e241dfd96402168a5abf8655d875e4d311f5da2f6623e7713bb43f",
+      "z": "02490c299332cba7556881aaeb66c7bffa280b215115546096a97a1e08cd5158"
+    },
+    "public_key_hash": "c644c9111647a1169ff429c60af1a5d8769d6464fdcba62c2b839bbaa0c2ef57"
+  },
+  {
+    "description": "SLH-DSA-SHA2-128s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-128s"
+    ],
+    "scheme": "SLH-DSA-SHA2-128s",
+    "input_values": {
+      "SK.seed": "ccaa996e23ef0903a04474b2dcfec5df",
+      "SK.prf": "827064c9d387d5ca68d22749829cd97d",
+      "PK.seed": "8c19174b0ef1414901430fcc09bd5cc6"
+    },
+    "public_key_hash": "493c38c93427aa04de51d392bba021100602bf851c54e7a6d9d2f7ea3b328815"
+  },
+  {
+    "description": "SLH-DSA-SHA2-128f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-128f"
+    ],
+    "scheme": "SLH-DSA-SHA2-128f",
+    "input_values": {
+      "SK.seed": "1128e3adae187e3f0f4a3af9b4fae541",
+      "SK.prf": "07a42dfcdaa9d97966c0333682e27cbe",
+      "PK.seed": "3869e74b78bb85db434fb970833035ea"
+    },
+    "public_key_hash": "cd8a9ed000fa3ca293c40fce9c7fd739926f78f24d9997c136cd9b6114fd2cc4"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-128s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-128s"
+    ],
+    "scheme": "SLH-DSA-SHAKE-128s",
+    "input_values": {
+      "SK.seed": "e2a3505f5886bc1b50549c6e6cc4d4a0",
+      "SK.prf": "8a78dc025d2a427d64aae06736aed918",
+      "PK.seed": "f100a39c5ad74557f7fd392a2afd065b"
+    },
+    "public_key_hash": "f7011fed623dfd8810cc9abcd4b931c03d53c64f33df38d8f26f4c0d01699b0f"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-128f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-128f"
+    ],
+    "scheme": "SLH-DSA-SHAKE-128f",
+    "input_values": {
+      "SK.seed": "b0d77653cd75f0654a9a9f7897088557",
+      "SK.prf": "68b85ffcf408c22d09fea8815dc0dd05",
+      "PK.seed": "7051fefe2398e4d26921f57d63f7aa10"
+    },
+    "public_key_hash": "18882c76860001835cd05d6c447aa534830f547bcdeb41a137d93cc56918fdf3"
+  },
+  {
+    "description": "SLH-DSA-SHA2-192s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-192s"
+    ],
+    "scheme": "SLH-DSA-SHA2-192s",
+    "input_values": {
+      "SK.seed": "34004f2bf40a787c1a576eae8252a2204a4ceaf388278649",
+      "SK.prf": "769aaa4ef497541522255fa25ad40198cd8fb8d0df6d5fba",
+      "PK.seed": "a471f457c9baf2a7698354d9a51cd5eca19f735f9a613fa2"
+    },
+    "public_key_hash": "a5515bac993ba8f1b068111a3832cbfbe488e8b74bc2b5ff23a4a2ca4557f08b"
+  },
+  {
+    "description": "SLH-DSA-SHA2-192f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-192f"
+    ],
+    "scheme": "SLH-DSA-SHA2-192f",
+    "input_values": {
+      "SK.seed": "eb4b6f63a6895174b352eed0d7c681d7a5204aceab210252",
+      "SK.prf": "9c6577b4875817fc36e5440f416e8fb9781fdaf18a8872be",
+      "PK.seed": "fbb14a1fed1b20be50d275d51296d5c180a4baa303034fc9"
+    },
+    "public_key_hash": "c55a4a0e0bdf8ed1fcf9b2d7cffe7c58c88ec6808ecf357df5a9ed1c87c7b8af"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-192s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-192s"
+    ],
+    "scheme": "SLH-DSA-SHAKE-192s",
+    "input_values": {
+      "SK.seed": "55e7be953c48873748249f72189ddbacae1ba12763f971c9",
+      "SK.prf": "a957e7c0987174acf2721ca2972b923c3c93f445f3158229",
+      "PK.seed": "4a09e0911d451fcb83ade2fd81f0b2796005fd99562038ff"
+    },
+    "public_key_hash": "053938de973903c4193fa72e57388d570b6b8e04792ba19de49d1e7150e77c1f"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-192f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-192f"
+    ],
+    "scheme": "SLH-DSA-SHAKE-192f",
+    "input_values": {
+      "SK.seed": "9caa615433b7946ada1db8e3110090457e2bc7b435b776f7",
+      "SK.prf": "036782fabb1171ce13cf377f1abd83f12e10d6bde7dfeb0a",
+      "PK.seed": "6da92dea39aa55d4eb02d59c1bc108c02aa98b33f098897f"
+    },
+    "public_key_hash": "da0d294fbdbd70299a9ea07773e3a0062ad873279a32b9dd22ee2e78d8b333a6"
+  },
+  {
+    "description": "SLH-DSA-SHA2-256s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-256s"
+    ],
+    "scheme": "SLH-DSA-SHA2-256s",
+    "input_values": {
+      "SK.seed": "519fd3887b46d55f1917d0ef6f15b23170a18563a8f6a135ca25db198522bccd",
+      "SK.prf": "2fb50f1665d80d68105b74a143549bcb2aa471a264728a97014f370153fa280c",
+      "PK.seed": "8b8f1021b8b190c67e00ee567a3c3b443d2561f901846f0f92d355b0b25e6bdd"
+    },
+    "public_key_hash": "de7a7366e13368cd94c88f81178dab7f92146ad602f09dfcb9765c29053c29a3"
+  },
+  {
+    "description": "SLH-DSA-SHA2-256f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHA2-256f"
+    ],
+    "scheme": "SLH-DSA-SHA2-256f",
+    "input_values": {
+      "SK.seed": "899980661889b2ce60130acfb2d068549d207c6d0f5d018670650fc7861c3242",
+      "SK.prf": "d8a2caac832386d41b7b01987cfbc3fda251930bf7e96ccaa03d2f4794ff6791",
+      "PK.seed": "90018ea90db31b3f60f6b333e2f92e07e3c01501e05061e13965497e5061a04f"
+    },
+    "public_key_hash": "41f6d2da9dcfa45f5db19b3b92774413811df480dc7556b7ded8bb90cc33d67d"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-256s",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-256s"
+    ],
+    "scheme": "SLH-DSA-SHAKE-256s",
+    "input_values": {
+      "SK.seed": "2bdf65a33364001167a57900f3e33d44202eac041060709b06a3a6f76e7f6a32",
+      "SK.prf": "c6452976c9d62608587ac6f5123c95021f1c80d3fe9a7215f8ca7b67597311d5",
+      "PK.seed": "f9c67078b9f4c01b5371611a6e52ecabeaf0498e5325320b64b93c708c84e56d"
+    },
+    "public_key_hash": "df505a43bc9746c58f9f29e1e0223b452622f60cd747f2726f7b38fb3abe186f"
+  },
+  {
+    "description": "SLH-DSA-SHAKE-256f",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "SLH-DSA-SHAKE-256f"
+    ],
+    "scheme": "SLH-DSA-SHAKE-256f",
+    "input_values": {
+      "SK.seed": "197b5cb10d27a61eb1e23002242c782b970efbbe85b2608e9419d77819a42737",
+      "SK.prf": "d78ca5a8bec554a0fd71866c3578d094eaf87bf458dca9fffd9dbcb505c88ea7",
+      "PK.seed": "0a70e9fad84b6834501276ccad4f17bf32090dd5092fbc53c857e11101ae72c9"
+    },
+    "public_key_hash": "56d621219235fd8d57adad5248ddd65b996461bfe43c4d35b8bb4cfac7c99ceb"
+  },
+  {
+    "description": "XMSS-SHA2_10_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_10_256"
+    ],
+    "scheme": "XMSS-SHA2_10_256",
+    "input_values": {
+      "S_XMSS": "48b313e74de3559b728d58a5b47c675be609e16e3c2473ddc643852487431337",
+      "SK_PRF": "9d2a84820c3f115c919bbf2948191cef9fb27bf1a52e2d41943d430f9d277c2c",
+      "SEED": "c0abbc0dff4336cc92c7ae83abadc4c78f57bb2ae20ee8b9ca18200b14da79cc"
+    }
+  },
+  {
+    "description": "XMSS-SHA2_16_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_16_256"
+    ],
+    "scheme": "XMSS-SHA2_16_256",
+    "input_values": {
+      "S_XMSS": "39a3be3b5bcc1b6f86d1482e64775f3a161de3a733d63089fe57158a71431b3b",
+      "SK_PRF": "32a4b91489c2ced43662d3f3550c06d6851c1d8ba0358422b4f4a3f9835c0531",
+      "SEED": "bdcf755cd550e807a68943d8525de39810ab234bf1e99db85214b2a2be7ffc5d"
+    }
+  },
+  {
+    "description": "XMSS-SHA2_20_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_20_256"
+    ],
+    "scheme": "XMSS-SHA2_20_256",
+    "input_values": {
+      "S_XMSS": "a14f0597ac773c9bc75eec0705c2500def5769d966c5b75275513245b2dd998d",
+      "SK_PRF": "41284748eba4abb8faa91fb97ccd8a83795bbe115e82df18e45e7f5671eec12b",
+      "SEED": "a566c23719c6c6825e4d5a0f742cbb58e7d9d895af27cd5ea75d88107eb07deb"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_10_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_10_256"
+    ],
+    "scheme": "XMSS-SHAKE256_10_256",
+    "input_values": {
+      "S_XMSS": "c5bb173b782fc214385d582e1f34bf26e99fdef56feb4c3dcaee4d581df66de0",
+      "SK_PRF": "4b17595fb7f4b8563e31dd6a62891a99875546628c767059e3225b748495f298",
+      "SEED": "033fc1c9f846f3740be60385c2afb76070faae6ffbf401d61900402f18e28490"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_16_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_16_256"
+    ],
+    "scheme": "XMSS-SHAKE256_16_256",
+    "input_values": {
+      "S_XMSS": "f939d23712587dbe786928ad6e31306beb974fd66c30df4b14cbba619236fda4",
+      "SK_PRF": "83fa2f5d86b2fb13a0392c593a7344d39e355ab6f6c564046bf01038f5dfdb75",
+      "SEED": "fe801e9b3fdc52d0881887e8f99b10e3747ff82a439cb972ee92d6da2189976c"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_20_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_20_256"
+    ],
+    "scheme": "XMSS-SHAKE256_20_256",
+    "input_values": {
+      "S_XMSS": "ae58c756aba031c6c76b3c2ebb9d1db257513d04f609b3b2a7152c5e91770683",
+      "SK_PRF": "0f7d887e4ddf4141ccfa194a5320ff5ce7fa64599f340c901a544147aacc56ff",
+      "SEED": "6fe1332bb66d6bb76cb205ac7ccc65ae80c54cadc8b03a97a8405be3f497fbb5"
+    }
+  },
+  {
+    "description": "XMSS-SHA2_10_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_10_192"
+    ],
+    "scheme": "XMSS-SHA2_10_192",
+    "input_values": {
+      "S_XMSS": "89949a690b3c9e138cbb6c4f88b863f8bf06d120ef8649c4",
+      "SK_PRF": "9f70572b031b3286d9f44594aee4b2aa028fe7e4fba75152",
+      "SEED": "7b9996bb0d4de9a3cbc249bbe1a868c8007943b803e3af51"
+    }
+  },
+  {
+    "description": "XMSS-SHA2_16_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_16_192"
+    ],
+    "scheme": "XMSS-SHA2_16_192",
+    "input_values": {
+      "S_XMSS": "f05d21d7e5dbd41132c826740d63a89ba0f558bb2510bb1d",
+      "SK_PRF": "01a35c571a088bef9c64e1411c8074312cd83890012a4d9e",
+      "SEED": "37228b9991d19a38e33c51c96c34733bd7e3f192f610688a"
+    }
+  },
+  {
+    "description": "XMSS-SHA2_20_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHA2_20_192"
+    ],
+    "scheme": "XMSS-SHA2_20_192",
+    "input_values": {
+      "S_XMSS": "a11ec927289c89ae445db2398d92ae08d70474dc5e2035db",
+      "SK_PRF": "ec8b62c6a60500fa6298ded5610512885f597487a6f57aac",
+      "SEED": "f99c39304d3743f25a64ec973ef06819119a22890d972ca3"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_10_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_10_192"
+    ],
+    "scheme": "XMSS-SHAKE256_10_192",
+    "input_values": {
+      "S_XMSS": "ff82d56e2c848861b6a53aefddd070f9c0acd1de350ac665",
+      "SK_PRF": "6793fd914712d99104332c927f67ab35215ba1c9fa6538e5",
+      "SEED": "9e38856d4396c165971ba2eaf4723f08fa090dc1f611e9b9"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_16_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_16_192"
+    ],
+    "scheme": "XMSS-SHAKE256_16_192",
+    "input_values": {
+      "S_XMSS": "c8581f79e8e640e098f2b86c689d2d5b25523b7c8c908bf3",
+      "SK_PRF": "70e77b7256e68c9dcadf71a6fa565c133a86b30176b38d95",
+      "SEED": "0254ed6ce7e60bff8e82664cef8d000dea3ca97e80f4afa0"
+    }
+  },
+  {
+    "description": "XMSS-SHAKE256_20_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSS-SHAKE256_20_192"
+    ],
+    "scheme": "XMSS-SHAKE256_20_192",
+    "input_values": {
+      "S_XMSS": "f57d04a2bc8270dd2f4346902439e4a17a17d37ec3dababd",
+      "SK_PRF": "c218ea66809ad8e0431f523edbbe3194af32682024ce302b",
+      "SEED": "74d1ab105ddc618a3dee66f58fac90aecb2504d6e4ece45f"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_20/2_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_20/2_256"
+    ],
+    "scheme": "XMSSMT-SHA2_20/2_256",
+    "input_values": {
+      "S_XMSS": "37372fda540f14b02cc011ab4f83fcf0e247089420e8ab8d6567f24ae1be952c",
+      "SK_PRF": "ccad273fc67e2394d7a585f270d267696ba3b4639643d2760aca081e72e50efd",
+      "SEED": "18211912778db41a454227968012454bf3e90c46e7f110d89f108a417d2c8c37"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_20/4_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_20/4_256"
+    ],
+    "scheme": "XMSSMT-SHA2_20/4_256",
+    "input_values": {
+      "S_XMSS": "8b3978bfe0916d26b0c04bd791fec283a82aea3ce0ef6a6b7d5a16b4c2fac4da",
+      "SK_PRF": "5938ce7a75850d13894fb3205a93126f6ba650e2b145399fcaf7d2f6057759dc",
+      "SEED": "2dc3d8541a1954c897901019a7ca48cc7079e42286d5d95d8ba45c71dd987569"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/2_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/2_256"
+    ],
+    "scheme": "XMSSMT-SHA2_40/2_256",
+    "input_values": {
+      "S_XMSS": "0f240afdcd3823fb4dd16badb7b9d250f41d1d9e98d68aea15d47ee0e83a91c6",
+      "SK_PRF": "bd493bfc11d6e998bccb2d88715f76a3d646aba6442ceb0df6b413fa7a1dffcc",
+      "SEED": "81d952bfaf620a01887d7f29ad3123014677cb58648e68d30ec1841c77e60583"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/4_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/4_256"
+    ],
+    "scheme": "XMSSMT-SHA2_40/4_256",
+    "input_values": {
+      "S_XMSS": "417d04eed1f612e21532bfa4ca2952b80688b2ab8e26ed02166590e393990bdc",
+      "SK_PRF": "c328efab54b4a8dd22cd17d4ef8e3029038f805061d3eea61af02c17661f6651",
+      "SEED": "ada0b7ac99692e3d86408de3921e760c41f15aa5d1d108c16a5618adec118794"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/8_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/8_256"
+    ],
+    "scheme": "XMSSMT-SHA2_40/8_256",
+    "input_values": {
+      "S_XMSS": "91dd969e7a59aa370b5a41897d25f7c85ecd1601601640ccaf861626674c96db",
+      "SK_PRF": "d7c398cc0be0b063511328222928d446db3f74058c14e2c3c7acbd4cc228f583",
+      "SEED": "4b9047c7d59f152ca8b3f8fcbf574c67a033af45939092b19eb5fbc1b919e0c6"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/3_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/3_256"
+    ],
+    "scheme": "XMSSMT-SHA2_60/3_256",
+    "input_values": {
+      "S_XMSS": "cd0312051fa162c0c04e5a80dc24c2787cb1f78198b9abd6d15737eb0635ef6a",
+      "SK_PRF": "fbfc1b1a32d75c5668e3fb7089fee3804d4b03c8576051c6cfca4b8b3456ee6f",
+      "SEED": "6ed6baf03357f30fdae332329d8b85b8290cb5f1d53611fa62bd83c6d772efcf"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/6_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/6_256"
+    ],
+    "scheme": "XMSSMT-SHA2_60/6_256",
+    "input_values": {
+      "S_XMSS": "d17bd2bdd3da280fa3d94bad3562c3ae590501322495095622c9cc55f4e73ae5",
+      "SK_PRF": "171cc802989fbca3f6a11994ab76ca826c98aec4566f192fe46a568a1603ce24",
+      "SEED": "fd2ce272e05fe2ec08f557a74d5345e7efb14050e5f7f6e0b039781c2f2dc61f"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/12_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/12_256"
+    ],
+    "scheme": "XMSSMT-SHA2_60/12_256",
+    "input_values": {
+      "S_XMSS": "f17117ba26e16a75494da432f6c64498721f690d2eb2ba2682c5d80a44bb5d9e",
+      "SK_PRF": "8c19487296b1201f09f5c2ecc6024bf22e44e756cd047d8aa3bbc768b13e259a",
+      "SEED": "5e35f32a7bbc59e1539d65ca30e90f05d5a59f8e64245cea359f50a675a320a7"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_20/2_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_20/2_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_20/2_256",
+    "input_values": {
+      "S_XMSS": "7882e03faf897d40ad733cc68f5e8ae113a87f7073fb21fe70b9dc23cab545c5",
+      "SK_PRF": "28a241a18464765a2b0f68736e324652a49f945ef1f8393e7a8e654d1f877fe0",
+      "SEED": "2339a188add3b6fdbc5691013e622c067ed51ae8491023bb893877e9f8ceb5c5"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_20/4_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_20/4_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_20/4_256",
+    "input_values": {
+      "S_XMSS": "35164bd681a600d5b8716e36fb8c2a9b4f2f6866ca7b570a9c23bffb1fd21803",
+      "SK_PRF": "ccb167fc7635c6e7e7cc4e6645244fc2a72a78af2b164173e1729c445b8d25dd",
+      "SEED": "499048c57bce1d6fff9cb036570028e02f1faee11f96ca0f110db2131a5d4b64"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/2_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/2_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/2_256",
+    "input_values": {
+      "S_XMSS": "fbb7d9b4882737797020a272cb8315b76719a260ec742b9c988191173fb11aae",
+      "SK_PRF": "7eea5a95938445b48e09566a34327ae35a0cea50a13b2af9703c4c5d3c578adc",
+      "SEED": "38a94b2dccf0d154322b9a04733eb60d79e37b3a74fb0f1c9f31e904e8291ffe"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/4_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/4_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/4_256",
+    "input_values": {
+      "S_XMSS": "def7634f04180d9bcc48f1359b083c6b7010cccd6e764b44da8a9e2af35b52b6",
+      "SK_PRF": "934f2f848e6fb6baa245d78707b3e79a4f0935696b78a7b2cbc100970b0d009f",
+      "SEED": "60bf1ed39ea7fe0f7aed7efe05d3fc4c9961a76cb781ef91cb7ed3ef4a4bc789"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/8_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/8_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/8_256",
+    "input_values": {
+      "S_XMSS": "3fefa776128d60b0315d970de4fe1fe99b1a65c4315172d6579b6804b78ae478",
+      "SK_PRF": "c17f763170610e16c540f9e37db083fc19a2f122f5c449f1434671ec39ac482d",
+      "SEED": "972f53406c909213c80edf5f530d34f6fb90eac37e80f6d88a759397db87d8bf"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/3_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/3_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/3_256",
+    "input_values": {
+      "S_XMSS": "b14d01bd3b5e3730632fd481fa1cc4a85bcb7aef7adb5783f2564fc57519636e",
+      "SK_PRF": "54424c84eab884f5648d5629739268a3f646fd2d618dfa3b4d435757cc756e9e",
+      "SEED": "6ad9b2c07a224ab73b29ae35da785b6a23d3703c518e3d9b141854a7a819b757"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/6_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/6_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/6_256",
+    "input_values": {
+      "S_XMSS": "2428e547ad6d5d92deaceb258af862d1f9b09d5dbf2b3e25b5f4a0791f990e96",
+      "SK_PRF": "750e4042f7b77ac89f16ecfed103911c4bb948a0f88070c9f22ab473644c7541",
+      "SEED": "f3ae6689a7ea86c35aad92a5e50398a5235c9b2cb5b964c948b0acca1c50d20a"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/12_256",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/12_256"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/12_256",
+    "input_values": {
+      "S_XMSS": "e328c00b426244b789642ef82985bc132297101825a262f0933c8e19b5c2d696",
+      "SK_PRF": "c247415348cce3e3013903d1168a529656b931c61d7068aec91e5d927d990e4a",
+      "SEED": "7fe498da07d204e059c4dd1aff4a666a06d07f7ff54e6701038e80efb3234ebd"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_20/2_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_20/2_192"
+    ],
+    "scheme": "XMSSMT-SHA2_20/2_192",
+    "input_values": {
+      "S_XMSS": "c095f770d9fda4d304badd4815bb54371032d021f3a1605d",
+      "SK_PRF": "8e69cf70340d8111c9ba9d2819fa0a735b5934227b6feb32",
+      "SEED": "c8d816f39b2cf3162d14e012f1d48e81a44090b5ccf97cfb"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_20/4_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_20/4_192"
+    ],
+    "scheme": "XMSSMT-SHA2_20/4_192",
+    "input_values": {
+      "S_XMSS": "a040d853e5018be27479fe6a48c5f2470a00a6de99c4cd9c",
+      "SK_PRF": "70c659634a4b0aec3e34bbe6c98169ef115b7a5c590387dd",
+      "SEED": "c660380278d1291c232f464a11aac323a075d3e99a64bbf1"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/2_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/2_192"
+    ],
+    "scheme": "XMSSMT-SHA2_40/2_192",
+    "input_values": {
+      "S_XMSS": "3c6a80692b1a08f54cf597be23a388eb54835bc10f0a7efe",
+      "SK_PRF": "0ffa10519ff181cdd4889cd291d512eac642f4cc95c4283f",
+      "SEED": "8760cd68e387717a7098ee68e5727999f302f8cac5a0e772"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/4_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/4_192"
+    ],
+    "scheme": "XMSSMT-SHA2_40/4_192",
+    "input_values": {
+      "S_XMSS": "7a263da5d5dd774e1e8af81e84ce9acb8d49ecd8b2f9b20d",
+      "SK_PRF": "87f614bb84e10a662004cbd04a361d4ca7b1a09c93231f19",
+      "SEED": "6e15600089f3fd5039a5409fe6af38c66f11967b142b8f72"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_40/8_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_40/8_192"
+    ],
+    "scheme": "XMSSMT-SHA2_40/8_192",
+    "input_values": {
+      "S_XMSS": "27a6beddcb4cd8f210cef45eff42b9e261167119db9dfb98",
+      "SK_PRF": "09418a2dde664916794ae35dfba87465a185659a194ff138",
+      "SEED": "6e470099e76502e20c32618a82d34273ccbc3032cf5a39ef"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/3_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/3_192"
+    ],
+    "scheme": "XMSSMT-SHA2_60/3_192",
+    "input_values": {
+      "S_XMSS": "94db854f3cb0b1f8ddbd78dad9a87b4617a6c496f4512437",
+      "SK_PRF": "d8c64f5d215ff6fe2eb73e1f3f2bedca5d80bfc80ce9fffa",
+      "SEED": "e88a9e59814d28405e6c04d3cd6d97ec98f53cc62e0f4cf5"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/6_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/6_192"
+    ],
+    "scheme": "XMSSMT-SHA2_60/6_192",
+    "input_values": {
+      "S_XMSS": "3f7bc20ce315dca05610d9ecaf8a304a54abfd0df31f8e24",
+      "SK_PRF": "3e7a1e693dc0058494999c4f66eef059d67421b143672688",
+      "SEED": "f31da49e76575a415107e32bf53ba0cf2d4c74d2715f6d90"
+    }
+  },
+  {
+    "description": "XMSSMT-SHA2_60/12_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHA2_60/12_192"
+    ],
+    "scheme": "XMSSMT-SHA2_60/12_192",
+    "input_values": {
+      "S_XMSS": "8d51c6dea46769b85a493618867a676f6e54f7a077aec771",
+      "SK_PRF": "a2b1f4b685fabfd1701682bb9bf3b18db9ccb9ad2aa3bfe4",
+      "SEED": "1e808032bb9de3ffae292b0515c8fb8720558de676f21d3d"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_20/2_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_20/2_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_20/2_192",
+    "input_values": {
+      "S_XMSS": "e27af99c2296bb8b7a72eb4dcf8979244016e0510528c996",
+      "SK_PRF": "9d1923412859f7e0f26ee427545fb7c6597aac0e1832098e",
+      "SEED": "d4aadfb5c89d422b073a2907a0d38c7439e3b76d3a9da134"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_20/4_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_20/4_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_20/4_192",
+    "input_values": {
+      "S_XMSS": "e44d8e84dbb2ce7f17becdc8ac46ab5a291e6c4bbf5a323b",
+      "SK_PRF": "568da3cfc44091f066db1395c25fd13ae4810a3e98e44232",
+      "SEED": "dfdbe9fd90021b650dd0a024f719f7afee7cb46a1c56a364"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/2_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/2_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/2_192",
+    "input_values": {
+      "S_XMSS": "da38ddd98cd71921a872a14a6914e0193fe765f687e9fd64",
+      "SK_PRF": "13d63ba234fb75fef292274bd678ac180221d0bd8d82e57c",
+      "SEED": "04634909201fdd320787c29f7c4a841bfae11ae591917a33"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/4_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/4_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/4_192",
+    "input_values": {
+      "S_XMSS": "5320de1acbc78a73b2a3a688afe22b37885af46a953ec714",
+      "SK_PRF": "1797f172bddea7a832298bf86eb80bb119dfb3c2cd80cb64",
+      "SEED": "35b92b1b02b1944428ac56390783cf206242474b8be67b39"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_40/8_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_40/8_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_40/8_192",
+    "input_values": {
+      "S_XMSS": "bc0a91fdbec7474507041b47cf9cd0fba6db3eeb1e130ac9",
+      "SK_PRF": "1fc6661a50135473c98bdd8b09162fdfe8910d3fd9d4f434",
+      "SEED": "310349ee9829b769d711cff10bab3be7f20bb5f2cde58a07"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/3_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/3_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/3_192",
+    "input_values": {
+      "S_XMSS": "a73450fdc008196c8c8065a0a616f8532d0dc036e9ff1464",
+      "SK_PRF": "13eb233de1d288dddc0c0819d750d3062164ab551dcf67d0",
+      "SEED": "ef5ce04ceca3dab9a71faa53cf01cc978ef82b8935c2b87e"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/6_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/6_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/6_192",
+    "input_values": {
+      "S_XMSS": "56f961a439dced9a53e6146578e043cc44cc7737cd8ad528",
+      "SK_PRF": "f095088863e6b66734361c08964bd37ed016e37b01f99483",
+      "SEED": "50652687cab2e5543f9598c2cbcf7a1410770fc7452931b4"
+    }
+  },
+  {
+    "description": "XMSSMT-SHAKE256_60/12_192",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "XMSSMT-SHAKE256_60/12_192"
+    ],
+    "scheme": "XMSSMT-SHAKE256_60/12_192",
+    "input_values": {
+      "S_XMSS": "433e1aa44e1865b99d2a526dcc2216d72043151df28ebf3a",
+      "SK_PRF": "9fb76301ddb6db2a750bb5dc54695d53b3464db6d83a3db1",
+      "SEED": "802659a3e75c641b31e911eb5438e714309467845b2f9706"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H5_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H5_W1"
+    ],
+    "scheme": "LMS_SHA256_M32_H5_W1",
+    "input_values": {
+      "I": "088ce660fe4f766f69d3a61bf2b50156",
+      "SEED": "eb5670b715b0c471e760e86d973839e19519d16399c6c7a2a6c11c638bedf6db"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H5_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H5_W2"
+    ],
+    "scheme": "LMS_SHA256_M32_H5_W2",
+    "input_values": {
+      "I": "6360334e39e4b6c91a66bf2a15f5207b",
+      "SEED": "3ee40d2c59a7f7c17a16d5610ac987d827271de34b9b03d6164742396d6f2cf5"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H5_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H5_W4"
+    ],
+    "scheme": "LMS_SHA256_M32_H5_W4",
+    "input_values": {
+      "I": "f3d90b6279f09821bd664428d8772ba0",
+      "SEED": "7fe241640116301bb551e1f8a369bda0e944886a090eff1fa49bafcdfd9d0783"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H5_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H5_W8"
+    ],
+    "scheme": "LMS_SHA256_M32_H5_W8",
+    "input_values": {
+      "I": "f1d1ca17f75541f095d1db2d8c74b6de",
+      "SEED": "c1d159cb680445d8f96911c6bcb3f0e6a5a921dc842931e657f3a4b5e95c115a"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H10_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H10_W1"
+    ],
+    "scheme": "LMS_SHA256_M32_H10_W1",
+    "input_values": {
+      "I": "beb82505393ede4cc3e5bd966d332e3b",
+      "SEED": "e3ed47b9b37b53eecdcf14756a6974b8456f83d32cadd033968ede05c16558c3"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H10_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H10_W2"
+    ],
+    "scheme": "LMS_SHA256_M32_H10_W2",
+    "input_values": {
+      "I": "353ce14be5124fd82f72af43bc258cd9",
+      "SEED": "7831942d17f877a75d9f0b39d521ac86aedaf5e2d8edf16a09ce3d357cd05ceb"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H10_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H10_W4"
+    ],
+    "scheme": "LMS_SHA256_M32_H10_W4",
+    "input_values": {
+      "I": "97283196017eaf998c6f74482ada0731",
+      "SEED": "437e8c55e45cf5d64b926465580feedbf74777adfd925f9f2c4228df7f8e3f5a"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H10_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H10_W8"
+    ],
+    "scheme": "LMS_SHA256_M32_H10_W8",
+    "input_values": {
+      "I": "9d2ae8f673f29d7668d77d553b1679a6",
+      "SEED": "6d6541c093dc3cf05c2dcbc16912c8e0bc11571d4766e1192f1b755fb24410a7"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H15_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H15_W1"
+    ],
+    "scheme": "LMS_SHA256_M32_H15_W1",
+    "input_values": {
+      "I": "bca5fab17d27c48e08472cf417fd6653",
+      "SEED": "266717468f0a711d0867abe7d8722eb1b5cbf700e139f2a23015a4a0d489fac9"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H15_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H15_W2"
+    ],
+    "scheme": "LMS_SHA256_M32_H15_W2",
+    "input_values": {
+      "I": "518e179324f568933146897b588cd0ed",
+      "SEED": "698757f8dddbfb4b12b1e7c80946dfc3d42911dc8b9a810e3d8ea154e69a338e"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H15_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H15_W4"
+    ],
+    "scheme": "LMS_SHA256_M32_H15_W4",
+    "input_values": {
+      "I": "8a0c2d443ee0b002fa506ca6c8435459",
+      "SEED": "481c48471499e3de9e4ef54c890a258a3b941c177dfe7b8f4d09c7655fa149c6"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H15_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H15_W8"
+    ],
+    "scheme": "LMS_SHA256_M32_H15_W8",
+    "input_values": {
+      "I": "2978efda0f2be6c7e09ebf618bea5eeb",
+      "SEED": "2e589ce33dbe9af987db57e7f97fe60c0949d5a7344730f2e4e6ed01b58e04e4"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H20_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H20_W1"
+    ],
+    "scheme": "LMS_SHA256_M32_H20_W1",
+    "input_values": {
+      "I": "352f0f6403c00ab90f96d033557bae03",
+      "SEED": "f6f2f9eba8bdfce707db6e0dbcd3e9d08283f3aab1e4f91b133928f7643c65f0"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H20_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H20_W2"
+    ],
+    "scheme": "LMS_SHA256_M32_H20_W2",
+    "input_values": {
+      "I": "06a24c8062645d9da04d410ef85807eb",
+      "SEED": "a56145331e7dd791762cce3dfb64189fc99fea62a37c374302ceb47ab0efff8e"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H20_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H20_W4"
+    ],
+    "scheme": "LMS_SHA256_M32_H20_W4",
+    "input_values": {
+      "I": "3f544ef9a7c0016fe28c25e283f8913b",
+      "SEED": "100580397cc80b82bdee837a8ba3278027aee519cfa17cb09f35f360eb4ecc09"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H20_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H20_W8"
+    ],
+    "scheme": "LMS_SHA256_M32_H20_W8",
+    "input_values": {
+      "I": "eb0a5d809517693fa1202f87f98a16a8",
+      "SEED": "dded6d5eb054e9b86119ee7d6d2d646cce1297c2afc7d385300f627f66c90c62"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H25_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H25_W1"
+    ],
+    "scheme": "LMS_SHA256_M32_H25_W1",
+    "input_values": {
+      "I": "d8fcea611527416e3e5b0fcb4741cf6e",
+      "SEED": "6f0d42ea64823b2fb19070a38a35b4e78924f4a2f44d5a5983454ca14c46d9b2"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H25_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H25_W2"
+    ],
+    "scheme": "LMS_SHA256_M32_H25_W2",
+    "input_values": {
+      "I": "83546ad7269b90a88b1be7755d8a77aa",
+      "SEED": "d7e9042b044b615812abf5d1fc9c6dcf5a85d83fa7501d17249fe8f48fba4336"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H25_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H25_W4"
+    ],
+    "scheme": "LMS_SHA256_M32_H25_W4",
+    "input_values": {
+      "I": "52091bd3a7443726fe53553481eb4bf4",
+      "SEED": "ead3ce4dbdd6e7de8b4310c320b0a42784af9fcc059c06cf760ac2b7749b2721"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M32_H25_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M32_H25_W8"
+    ],
+    "scheme": "LMS_SHA256_M32_H25_W8",
+    "input_values": {
+      "I": "22f01a883d038add4659719bf9529729",
+      "SEED": "a83eccd6c78eec7b6044d9bd451924077a8259bf966acdcff3d3e33126153462"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H5_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H5_W1"
+    ],
+    "scheme": "LMS_SHAKE_M32_H5_W1",
+    "input_values": {
+      "I": "fe64de1e893148ab51b80a587476b646",
+      "SEED": "b5de5ffd1140fe5b709127c05b5d9318c5abee5a1478c57d573ef071ef1df8b9"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H5_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H5_W2"
+    ],
+    "scheme": "LMS_SHAKE_M32_H5_W2",
+    "input_values": {
+      "I": "1a60d10c31ceceae1dd887f0f62380c2",
+      "SEED": "b6eee60a51fff6b46654b476641c7fb2843a11eab9fe4baeb8d8411b4adffb4d"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H5_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H5_W4"
+    ],
+    "scheme": "LMS_SHAKE_M32_H5_W4",
+    "input_values": {
+      "I": "72d98ce2de14f94ed11e0b4c2c12a07c",
+      "SEED": "82144e4584f10b1dfffaf2ef8812c87b636c494eabc9b8f995616ab0ae436bc5"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H5_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H5_W8"
+    ],
+    "scheme": "LMS_SHAKE_M32_H5_W8",
+    "input_values": {
+      "I": "465d00cd2404092a58a22bd2daf40953",
+      "SEED": "5d7ce42c0c6a4ab7eccb3a25c3ffb4fd20a03ac99406e2c5e979602e7eccc269"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H10_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H10_W1"
+    ],
+    "scheme": "LMS_SHAKE_M32_H10_W1",
+    "input_values": {
+      "I": "b8655ef633c2cad40059b125614cb9c6",
+      "SEED": "2f12b3e1c11909a5a3ab19fb688b89785099ec7de59378997b8e810ea41ec413"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H10_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H10_W2"
+    ],
+    "scheme": "LMS_SHAKE_M32_H10_W2",
+    "input_values": {
+      "I": "8cead76994e1064c56b3f0597e9ff814",
+      "SEED": "f866a9c9a04c442597bdae7211080ff151faae77f455c564be7a7ace348fad9c"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H10_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H10_W4"
+    ],
+    "scheme": "LMS_SHAKE_M32_H10_W4",
+    "input_values": {
+      "I": "1f087a06186065bfdec34e729e9c1954",
+      "SEED": "3a9e2aa9b6bbebdd2506e81de41c60c3d0ab5e4ffcc0ce366d2ccd7559a8e5d2"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H10_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H10_W8"
+    ],
+    "scheme": "LMS_SHAKE_M32_H10_W8",
+    "input_values": {
+      "I": "009385a83187faf45361d092af5feca8",
+      "SEED": "862334885c9e42ae7debdae6f7e602a3650d56a70ad804c64295f456bb602df5"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H15_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H15_W1"
+    ],
+    "scheme": "LMS_SHAKE_M32_H15_W1",
+    "input_values": {
+      "I": "f9b8231c58c5d198f7c2986a6e9ffb4a",
+      "SEED": "4c3e775befebd4e872944262efdf56c4206faa90b7d1ba32b605196657447280"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H15_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H15_W2"
+    ],
+    "scheme": "LMS_SHAKE_M32_H15_W2",
+    "input_values": {
+      "I": "5e4ad2bd02289d0d15a61230469f6c46",
+      "SEED": "dceea69eb6dc59b17f7bbd1c2cbf56352d15d47a73533518d41033ae00f011e4"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H15_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H15_W4"
+    ],
+    "scheme": "LMS_SHAKE_M32_H15_W4",
+    "input_values": {
+      "I": "70a4fe43fc639bb166c9a23cd2742b91",
+      "SEED": "e852d0dfcb425532b0d7fcd3f272791adacd21cadade9752affcb19841ec89af"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H15_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H15_W8"
+    ],
+    "scheme": "LMS_SHAKE_M32_H15_W8",
+    "input_values": {
+      "I": "64c4ca1ae3ae1296720fc2937d44c9f8",
+      "SEED": "f9f411307d10792695b3af8c6437f4777f415c29117112bad1f6dec68eb5a532"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H20_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H20_W1"
+    ],
+    "scheme": "LMS_SHAKE_M32_H20_W1",
+    "input_values": {
+      "I": "f3ee4f820df0ddae29e1b24b0fc46e63",
+      "SEED": "b09179a5683305790b6a009491241fe884894d4e0a5a395ceb7d32b57115f8cf"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H20_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H20_W2"
+    ],
+    "scheme": "LMS_SHAKE_M32_H20_W2",
+    "input_values": {
+      "I": "7d156a0cdd159f0ac6cbc649b06d0e21",
+      "SEED": "180930328b0f2d851911dfe1c9a6e2b7ab846237fe89088a6ede9052f681d8f5"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H20_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H20_W4"
+    ],
+    "scheme": "LMS_SHAKE_M32_H20_W4",
+    "input_values": {
+      "I": "1f8247d3732e63d2409d61ec3ec1a922",
+      "SEED": "70ff19fd9d685767ad6496ed1c718001d07326ccf0843db5483fb4aa5df743aa"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H20_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H20_W8"
+    ],
+    "scheme": "LMS_SHAKE_M32_H20_W8",
+    "input_values": {
+      "I": "86e7ce971f31564ac485a89f29cfa128",
+      "SEED": "aebb4d20f390e76bd03eebc58e1b8284b3eccb48f95f1d678aebd10e23f84053"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H25_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H25_W1"
+    ],
+    "scheme": "LMS_SHAKE_M32_H25_W1",
+    "input_values": {
+      "I": "ee50d0916f4724e9b0b20cb4d90db00d",
+      "SEED": "4f25989402125efedec223bd38121f6f90f85def603f78d09f2ecc1865999da5"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H25_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H25_W2"
+    ],
+    "scheme": "LMS_SHAKE_M32_H25_W2",
+    "input_values": {
+      "I": "c4f13f5d77d1e26fa270082d97fa537c",
+      "SEED": "e7333581a071ff18725e56f741f78db190bc84027c2e70abe133de9f36ff6291"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H25_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H25_W4"
+    ],
+    "scheme": "LMS_SHAKE_M32_H25_W4",
+    "input_values": {
+      "I": "aaceef5ddace36b5da443a0a79f72759",
+      "SEED": "a752a5848a408cc4c2dddce994ec7c38310cfdeb7b888e8415d9df63d4a36636"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M32_H25_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M32_H25_W8"
+    ],
+    "scheme": "LMS_SHAKE_M32_H25_W8",
+    "input_values": {
+      "I": "80b3e0d81ced94e55ef8710462087a93",
+      "SEED": "fefea75e7946348fbaf2f71dc8d66bd6639fddf557dedd55835e4c21f1693793"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H5_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H5_W1"
+    ],
+    "scheme": "LMS_SHA256_M24_H5_W1",
+    "input_values": {
+      "I": "ca9f6df1ea332a89e837957c01ebfba0",
+      "SEED": "3c63358d37abb37d4d159fa630c5d8fb0a9f5017df2b842c"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H5_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H5_W2"
+    ],
+    "scheme": "LMS_SHA256_M24_H5_W2",
+    "input_values": {
+      "I": "32f0a8022431abb59e6cdab7c019394c",
+      "SEED": "879b8be2f545b4a095bca7359b5e2ea2af45f1908012eee8"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H5_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H5_W4"
+    ],
+    "scheme": "LMS_SHA256_M24_H5_W4",
+    "input_values": {
+      "I": "d2a3ce9393c0b7d4fe1a86be3a1838fd",
+      "SEED": "f607d8910ea222bd1534d238365b42a2ddcc384b9720f8ce"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H5_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H5_W8"
+    ],
+    "scheme": "LMS_SHA256_M24_H5_W8",
+    "input_values": {
+      "I": "7a4396c9689274331946b4e849ea7a7d",
+      "SEED": "01a51fbae609d370d6420c77c0e6586e512f85d028a04105"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H10_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H10_W1"
+    ],
+    "scheme": "LMS_SHA256_M24_H10_W1",
+    "input_values": {
+      "I": "a235078af902f62800ec1d3aab6d605e",
+      "SEED": "4e51a1f05ac1bc8fb19d7b6b547943fd87a4767ef0718bdd"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H10_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H10_W2"
+    ],
+    "scheme": "LMS_SHA256_M24_H10_W2",
+    "input_values": {
+      "I": "3f16ab0220e74408774598d9c4bd96dd",
+      "SEED": "bd411ce0db678e46ea296b18c0e2a1b69dc49f436b79e79d"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H10_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H10_W4"
+    ],
+    "scheme": "LMS_SHA256_M24_H10_W4",
+    "input_values": {
+      "I": "686a227f9e895bf63c4cc5aecb6d24c0",
+      "SEED": "a140af958cd7da80476ddc9c5a9c03cc36bf07be0bc9ad8c"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H10_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H10_W8"
+    ],
+    "scheme": "LMS_SHA256_M24_H10_W8",
+    "input_values": {
+      "I": "1c3eef4b3716aef0eaac59d5716e7795",
+      "SEED": "bcece1f3bd0a71a12565a28cc859ec43a8d5c6f988bd770c"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H15_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H15_W1"
+    ],
+    "scheme": "LMS_SHA256_M24_H15_W1",
+    "input_values": {
+      "I": "1d68e8a04d49bac823cb382e5d95b782",
+      "SEED": "db55170aa08eda1cfd49d8ff4e8e221379cd50ac877f63c6"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H15_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H15_W2"
+    ],
+    "scheme": "LMS_SHA256_M24_H15_W2",
+    "input_values": {
+      "I": "98c601015cbc2908995e70b670b12936",
+      "SEED": "611e8e79532868369d651cbb31c637f6e874d5ef9b2a6c1d"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H15_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H15_W4"
+    ],
+    "scheme": "LMS_SHA256_M24_H15_W4",
+    "input_values": {
+      "I": "aa1595e9b185eb16d22e3d55f921e55b",
+      "SEED": "b376c419cc0886918aa75d38053e947e0b6726de815b5171"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H15_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H15_W8"
+    ],
+    "scheme": "LMS_SHA256_M24_H15_W8",
+    "input_values": {
+      "I": "e95901d50b703ed2826f89f928510385",
+      "SEED": "a106a5b30ce18bc3617f699fa048c6332d2d5c9d5196b61a"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H20_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H20_W1"
+    ],
+    "scheme": "LMS_SHA256_M24_H20_W1",
+    "input_values": {
+      "I": "9582d456c535a94b78376cbc90a3561f",
+      "SEED": "91653d81da357a2fac2593bc8251b227bf245886dd5f4822"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H20_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H20_W2"
+    ],
+    "scheme": "LMS_SHA256_M24_H20_W2",
+    "input_values": {
+      "I": "7be187f97bed9cd1c56ba9ff0dfd024d",
+      "SEED": "491815f5b56418a4e079888cbd5fc7f8ea0074fc3861c8cd"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H20_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H20_W4"
+    ],
+    "scheme": "LMS_SHA256_M24_H20_W4",
+    "input_values": {
+      "I": "9ce02a63abf92bc67923771205963bff",
+      "SEED": "beb78eaed87cdc8928a50138fec52ab6c6b0be6c5fcd2a8c"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H20_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H20_W8"
+    ],
+    "scheme": "LMS_SHA256_M24_H20_W8",
+    "input_values": {
+      "I": "868c2290c2a9adafdcc082feb0d0a869",
+      "SEED": "8f12633d41b7a643e35d32c9490b8facbd9a50b192362bda"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H25_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H25_W1"
+    ],
+    "scheme": "LMS_SHA256_M24_H25_W1",
+    "input_values": {
+      "I": "471846e8e93075ea18b85f2e49ec6924",
+      "SEED": "a4face2c2da79ef4ec42667290503377e831a764400bedfb"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H25_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H25_W2"
+    ],
+    "scheme": "LMS_SHA256_M24_H25_W2",
+    "input_values": {
+      "I": "5e3cd31faca65425d5ba537d1020ee83",
+      "SEED": "d5d92a84b7e70e50642db8e6c363ea5ded54f2b11e40058b"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H25_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H25_W4"
+    ],
+    "scheme": "LMS_SHA256_M24_H25_W4",
+    "input_values": {
+      "I": "97305f0f3e3eae36ad9b9d3250120f86",
+      "SEED": "a5c6e12604d5cf4ab6412e2ad92aa3aa05ed983c16dbdf0c"
+    }
+  },
+  {
+    "description": "LMS_SHA256_M24_H25_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHA256_M24_H25_W8"
+    ],
+    "scheme": "LMS_SHA256_M24_H25_W8",
+    "input_values": {
+      "I": "15dcc0d5d9ed8437678307da4aa1a791",
+      "SEED": "44c61e456924ecc7f500bf2bf168c4991697aa44c499e38b"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H5_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H5_W1"
+    ],
+    "scheme": "LMS_SHAKE_M24_H5_W1",
+    "input_values": {
+      "I": "7eeffdce2c64d13faafa14344259623e",
+      "SEED": "9a54fd06207364b1fb72056a0613b11be3ae70634be76467"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H5_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H5_W2"
+    ],
+    "scheme": "LMS_SHAKE_M24_H5_W2",
+    "input_values": {
+      "I": "a53643427454f4bf9673fb66723e9d57",
+      "SEED": "0a607d1e36381b7e5874a891202b7c3ef48128f6bc737872"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H5_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H5_W4"
+    ],
+    "scheme": "LMS_SHAKE_M24_H5_W4",
+    "input_values": {
+      "I": "f5a5456b756c783b6a86c0d59dd68d99",
+      "SEED": "d1a977afc3ba63d38f3544f85ecfe6ab6acdc7673d0de3d2"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H5_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H5_W8"
+    ],
+    "scheme": "LMS_SHAKE_M24_H5_W8",
+    "input_values": {
+      "I": "e27b0265ee7e1ae937750a8d42cca1b3",
+      "SEED": "f1847b0efa772f6cd2ff6a0860b8001cdce47d6800c2f6a3"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H10_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H10_W1"
+    ],
+    "scheme": "LMS_SHAKE_M24_H10_W1",
+    "input_values": {
+      "I": "2fe793faea00913adbd074cab36c15cc",
+      "SEED": "eba51d23c96bf88eeaac0b382b47ad5e2d05497324b186b0"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H10_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H10_W2"
+    ],
+    "scheme": "LMS_SHAKE_M24_H10_W2",
+    "input_values": {
+      "I": "08a54832a2aaac5fe8c7e179fda293c1",
+      "SEED": "d12a76d31dabee1d980f076fe78547e406e689b3f54ccf8c"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H10_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H10_W4"
+    ],
+    "scheme": "LMS_SHAKE_M24_H10_W4",
+    "input_values": {
+      "I": "5c5c39b24fc2420f0cd110260bf512c1",
+      "SEED": "aeb9ca6b996af790b04863607ad8c4618e56ca87c47ca8d0"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H10_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H10_W8"
+    ],
+    "scheme": "LMS_SHAKE_M24_H10_W8",
+    "input_values": {
+      "I": "34a03788789b358db745d82e6d9db924",
+      "SEED": "eb884035f4ec69113767231b5d883c1d879adcfafed9b79f"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H15_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H15_W1"
+    ],
+    "scheme": "LMS_SHAKE_M24_H15_W1",
+    "input_values": {
+      "I": "65ae725f68f91cd0e511c0b80ba08468",
+      "SEED": "b17524ecb98f853e29b4e9beaf261442e89b1db65cff3f3b"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H15_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H15_W2"
+    ],
+    "scheme": "LMS_SHAKE_M24_H15_W2",
+    "input_values": {
+      "I": "1528eb3117e0344216ec913191eee202",
+      "SEED": "2263377d29c1cb48432fd9cf3ef3e051d3f4ed087da47822"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H15_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H15_W4"
+    ],
+    "scheme": "LMS_SHAKE_M24_H15_W4",
+    "input_values": {
+      "I": "bd6f0cd7849d8e22d479813dcffa6c0b",
+      "SEED": "e527521798cecc77094bbf60bd294342fa0ea3b018f78444"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H15_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H15_W8"
+    ],
+    "scheme": "LMS_SHAKE_M24_H15_W8",
+    "input_values": {
+      "I": "f80f3c5d5c9343caf4c9f9ff34838dd8",
+      "SEED": "f3d741e9351dc0edbe4b7427d6e4e3b264a81664843e1164"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H20_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H20_W1"
+    ],
+    "scheme": "LMS_SHAKE_M24_H20_W1",
+    "input_values": {
+      "I": "a9d16b7e4a6af639ea5f3d9eeada0eba",
+      "SEED": "28acc13f98a94b08411a4b16cf3ccf4ec781799f95e140f2"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H20_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H20_W2"
+    ],
+    "scheme": "LMS_SHAKE_M24_H20_W2",
+    "input_values": {
+      "I": "dfc196c883953f927f601a52f7f190b1",
+      "SEED": "a715af124d087f63f7b29aa53d8161141bd0a96c9f7ad24e"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H20_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H20_W4"
+    ],
+    "scheme": "LMS_SHAKE_M24_H20_W4",
+    "input_values": {
+      "I": "dce3208c952c826397e4934d5422e1fb",
+      "SEED": "aa6c2ebeeb06edb74b3fe48e8a84a982227d47f9b7e38c1a"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H20_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H20_W8"
+    ],
+    "scheme": "LMS_SHAKE_M24_H20_W8",
+    "input_values": {
+      "I": "f865c0df9698fdc72b6bf40bef6d75b6",
+      "SEED": "c6d6d02bcae67619712330ee823fca855ba55a793b9a29c3"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H25_W1",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H25_W1"
+    ],
+    "scheme": "LMS_SHAKE_M24_H25_W1",
+    "input_values": {
+      "I": "bcff62594ade888b05d3a1999d3f6652",
+      "SEED": "5818c3a77555e271f1dfb727cc2e9994bbcc5347cfc998e4"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H25_W2",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H25_W2"
+    ],
+    "scheme": "LMS_SHAKE_M24_H25_W2",
+    "input_values": {
+      "I": "5d87b6187bb40044f57399afd56edfe6",
+      "SEED": "d62d71e2418c297c39caf2367ed05cb6fa4b2c20b052dacd"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H25_W4",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H25_W4"
+    ],
+    "scheme": "LMS_SHAKE_M24_H25_W4",
+    "input_values": {
+      "I": "f3c6ace3f368e36a848f131585dd1220",
+      "SEED": "cbf2106aec1a286eff3dbe14410463102e64e8e9078a8cda"
+    }
+  },
+  {
+    "description": "LMS_SHAKE_M24_H25_W8",
+    "path": [
+      "SLIP-9999",
+      "0",
+      "LMS_SHAKE_M24_H25_W8"
+    ],
+    "scheme": "LMS_SHAKE_M24_H25_W8",
+    "input_values": {
+      "I": "d993838b9f154003006246cb4ff4401f",
+      "SEED": "a7c81492dd11803681e9e42d316c133694bfaa3083fd3819"
+    }
+  }
+]
