@@ -21,8 +21,7 @@ MIN_SYMBOL_LENGTH = 2
 MAX_SYMBOL_LENGTH = 6
 NORMAL_SYMBOL_LENGTHS = (3, 4)
 
-# Values that mean "no symbol" or "no name" and are allowed to repeat.
-SYMBOL_PLACEHOLDERS = {"", "---"}
+# Coin names of rows that are not assigned to a coin. They are allowed to repeat.
 NAME_PLACEHOLDERS = {"", "*reserved*", "*deprecated*"}
 
 
@@ -61,9 +60,9 @@ def main(base_path, head_path):
     def entries(rows, idx, placeholders):
         return [(r.lineno, f"coin type {r.cells[0]} ('{r.cells[idx]}')", r.cells[idx]) for r in rows if r.cells[idx] not in placeholders]
 
-    symbols = entries(head.rows, 1, SYMBOL_PLACEHOLDERS)
+    symbols = entries(head.rows, 1, {""})
     names = entries(head.rows, 2, NAME_PLACEHOLDERS)
-    base_symbols = [e[2] for e in entries(base.rows, 1, SYMBOL_PLACEHOLDERS)]
+    base_symbols = [e[2] for e in entries(base.rows, 1, {""})]
     base_names = [e[2] for e in entries(base.rows, 2, NAME_PLACEHOLDERS)]
 
     # The remaining checks only apply to new or modified rows.
@@ -89,8 +88,8 @@ def main(base_path, head_path):
                 report("error", lineno, f"The coin type {n} is already registered. Please choose a different coin type.")
 
         # Symbol must consist of ASCII letters and digits, should be upper-case and
-        # short, and must not duplicate an existing one.
-        if symbol not in SYMBOL_PLACEHOLDERS:
+        # short, and must not duplicate an existing one. It may be empty.
+        if symbol:
             if not re.fullmatch(r"[A-Za-z0-9]+", symbol):
                 report("error", lineno, f"The symbol '{symbol}' must consist of ASCII letters and digits only.")
             elif symbol != symbol.upper():
@@ -107,15 +106,26 @@ def main(base_path, head_path):
             entry = next(e for e in symbols if e[0] == lineno)
             check_unique(report, entry, "symbol", base_symbols, symbols, normalize)
 
-        # Coin name is required when a symbol is given, should be ASCII and must
-        # not duplicate an existing one. Rows with neither mark unassigned coin types.
-        if not name and symbol not in SYMBOL_PLACEHOLDERS:
-            report("error", lineno, "The coin name must not be empty.")
-
-        if name not in NAME_PLACEHOLDERS:
+        # Coin name is required, should be ASCII and must not duplicate an existing
+        # one. Placeholders only appear in rows that are already in the table, except
+        # that an existing coin type may be deprecated.
+        deprecating = name == "*deprecated*" and any(r.cells[0] == ctype and r.cells[1:] != ("", "") for r in base.rows)
+        if name in NAME_PLACEHOLDERS and not deprecating:
+            report("error", lineno, "The coin name must not be empty." if not name else f"The coin name must not be '{name}'.")
+        elif name not in NAME_PLACEHOLDERS:
             check_name(report, lineno, "coin name", name)
             entry = next(e for e in names if e[0] == lineno)
             check_unique(report, entry, "coin name", base_names, names, normalize_name)
+
+    # Rows must not be removed. Modifying a registration needs the reviewer's attention,
+    # since it is only allowed at the request of the registrant. Empty rows may be filled in.
+    head_lines = {r.cells[0]: r.lineno for r in head.rows}
+    for old in changed_rows(head.rows, base.rows):
+        ctype = old.cells[0]
+        if ctype not in head_lines:
+            report("error", None, f"The coin type {ctype} must not be removed. Please change its coin name to '*deprecated*' instead.")
+        elif old.cells[1:] != ("", ""):
+            report("warning", head_lines[ctype], f"The row of coin type {ctype} should not be modified unless the change is requested by the party that registered the coin type.")
 
     findings.finish()
 
